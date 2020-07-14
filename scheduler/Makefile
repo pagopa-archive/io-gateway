@@ -8,7 +8,7 @@ build:
 
 start:
 	docker run -ti -d \
-	-p 3000:3000 \
+	-p 3100:3100 \
 	--rm --name iosdk-scheduler --hostname iosdkscheduler \
 	-e IO_SDK_SCHEDULER_CONFIG='/scheduler/config/io-sdk-scheduler-container-config.json' \
     -v ${HOME}:/scheduler/config \

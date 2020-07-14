@@ -14,6 +14,7 @@
               <MenuItem icon="fa fa-wrench" description="Custom Import" to="custom"/>
               <MenuItem icon="fas fa-shipping-fast" description="Send Messages" to="ship"/>
               <MenuItem icon="far fa-envelope" description="Single Message" to="send"/>
+              <MenuItem icon="fa fa-cog" description="Config" to="config"/>
               <MenuItem icon="fas fa-bug" description="Debugging" to="debug"/>
               <MenuItem icon="fas fa-file-code" description="Development" url="http://localhost:3000" to="editor"/>
               <MenuItem icon="fas fa-info-circle" description="About" to="about"/>

@@ -1,7 +1,7 @@
 FROM node:10
 
-ENV PORT 3000
-EXPOSE 3000
+ENV PORT 3100
+EXPOSE 3100
 
 COPY package.json package.json
 RUN npm install
