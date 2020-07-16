@@ -27,18 +27,24 @@ type IoSDKConfig struct {
 	IoMessages string `json:"io-messages"`
 	// AppDir is the application directory
 	AppDir string `json:"app-dir"`
+    // SchedulerApiHost is the scheduler api host
+    SchedulerAPIHostLocal string `json:"scheduler-apihost-local"`
+    // SchedulerApiHostDocker is the schedule api host within docker
+    SchedulerAPIHostDocker string `json:"scheduler-apihost-docker"`
 }
 
 // ConfigMap returns a map of the configuration
 func ConfigMap() map[string]string {
 	return map[string]string{
-		"whisk-apihost-local":  Config.WhiskAPIHostLocal,
-		"whisk-apihost-docker": Config.WhiskAPIHostDocker,
-		"whisk-apikey":         Config.WhiskAPIKey,
-		"whisk-namespace":      Config.WhiskNamespace,
-		"io-apikey":            Config.IoAPIKey,
-		"io-messages":          Config.IoMessages,
-		"app-dir":              Config.AppDir,
+		"whisk-apihost-local":      Config.WhiskAPIHostLocal,
+		"whisk-apihost-docker":     Config.WhiskAPIHostDocker,
+		"whisk-apikey":             Config.WhiskAPIKey,
+		"whisk-namespace":          Config.WhiskNamespace,
+		"io-apikey":                Config.IoAPIKey,
+		"io-messages":              Config.IoMessages,
+		"app-dir":                  Config.AppDir,
+		"scheduler-apihost-local":  Config.SchedulerAPIHostLocal,
+		"scheduler-apihost-docker": Config.SchedulerAPIHostDocker,
 	}
 }
 
@@ -113,6 +119,13 @@ func configureDefaults() {
 		Config.WhiskAPIHostDocker = "http://openwhisk:3280"
 	}
 
+    if Config.SchedulerAPIHostLocal == "" {
+        Config.SchedulerAPIHostLocal = "http://localhost:3100"
+    }
+    if Config.SchedulerAPIHostDocker == "" {
+        Config.SchedulerAPIHostDocker = "http://scheduler:3100"
+    }
+
 	if Config.WhiskNamespace == "" {
 		Config.WhiskNamespace = "guest"
 	}
@@ -165,11 +178,23 @@ func configureIde() {
 	}
 }
 
+func configureScheduler() {
+    fmt.Println("Configuring Scheduler")
+
+	cmd := fmt.Sprintf("docker exec iosdk-scheduler wsk property set --apihost %s --auth %s", Config.WhiskAPIHostDocker, Config.WhiskAPIKey)
+	err := Run(cmd)
+	if err != nil {
+		fmt.Println(err)
+	}
+}
+
 // PropagateConfig propagate configurations to started services
 func PropagateConfig() {
 
 	fmt.Println("Configuring Whisk")
 	WhiskUpdatePackageParameters("iosdk", ConfigMap())
+	configureScheduler()
+
 	if !*skipIde {
 		fmt.Println("Configuring IDE")
 		configureIde()

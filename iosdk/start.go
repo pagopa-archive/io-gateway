@@ -24,6 +24,12 @@ func Start() error {
 	if err != nil {
 		return err
 	}
+
+	err = SchedulerDeploy()
+	if err != nil {
+	    return err
+	}
+
 	if !*skipIde {
 		err = IdeDeploy(Config.AppDir)
 		if err != nil {
@@ -36,6 +42,7 @@ func Start() error {
 // Stop openwhisk-ide
 func Stop() error {
 	IdeDestroy()
+	SchedulerDestroy()
 	WhiskDestroy()
 	RedisDestroy()
 	return nil

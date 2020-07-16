@@ -21,16 +21,19 @@ clean:
 	-$(MAKE) -C admin clean
 	-$(MAKE) -C ide clean
 	-$(MAKE) -C iosdk clean
+	-$(MAKE) -C scheduler clean
 	
 build: preflight
 	$(MAKE) -C admin
 	$(MAKE) -C ide
 	$(MAKE) -C iosdk
+	$(MAKE) -C scheduler
 
 push:
 	docker login
 	$(MAKE) -C admin push
 	$(MAKE) -C ide push
+	$(MAKE) -C scheduler push
 
 test:
 	# test cli
@@ -39,6 +42,8 @@ test:
 	bash test.sh
 	# test actions
 	make -C admin/actions test
+	# test scheduler
+	make -C scheduler test
 
 snapshot:
 	git tag $(shell date +%Y.%m%d.%H%M-snapshot)

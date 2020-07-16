@@ -42,7 +42,7 @@ class CommandLineCronJob {
      */
     public async start()  {
         this.scheduledInstance = cron.schedule(this.job.time, () => {
-            console.log('Firing jobName',this.job.jobName);
+            console.log('********** Firing jobName **********: ',this.job.jobName);
             this.task.run();
         });
     }

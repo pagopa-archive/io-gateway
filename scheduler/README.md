@@ -11,14 +11,14 @@ A simple Node.js REST api for scheduling execution of command line based actions
 [nodemon] watching path(s): src/**/*
 [nodemon] watching extensions: ts
 [nodemon] starting `ts-node ./src/index.ts`
-IO-SDK REST Api Scheduler is running on 3000
+IO-SDK REST Api Scheduler is running on 3100
 ````
 
-The API will be available in this case at the url `http:\\localhost:3000\scheduler`
+The API will be available in this case at the url `http:\\localhost:3100\scheduler`
 
 ### Add a new Job
 
-Send a POST to endpoint `http://localhost:3000/scheduler` using this JSON structure as payload
+Send a POST to endpoint `http://localhost:3100/scheduler` using this JSON structure as payload
 
 ```
 {
@@ -37,15 +37,15 @@ is returned if that's the case
 Using `curl` this could be achieved with
 
 ```
-curl -X POST -d '{"jobName":"testJob","time": "*/1 * * * *","action": "echo test message logged every 1 minute"}' http://localhost:3000/scheduler --header "Content-Type:application/json"
+curl -X POST -d '{"jobName":"testJob","time": "*/1 * * * *","action": "echo test message logged every 1 minute"}' http://localhost:3100/scheduler --header "Content-Type:application/json"
 ```
 
 ### Get the list of scheduled job
 
-Send a GET to endpoint `http://localhost:3000/scheduler`
+Send a GET to endpoint `http://localhost:3100/scheduler`
 
 ```
-curl http://localhost:3000/scheduler
+curl http://localhost:3100/scheduler
 
 return an array with the scheduled job reference
 
@@ -65,7 +65,7 @@ return an array with the scheduled job reference
 
 ### Remove a scheduled job
 
-Send a DELETE to endpoint `http://localhost:3000/scheduler` using this JSON structure as payload
+Send a DELETE to endpoint `http://localhost:3100/scheduler` using this JSON structure as payload
 
 ```
 {
@@ -73,7 +73,7 @@ Send a DELETE to endpoint `http://localhost:3000/scheduler` using this JSON stru
 }
 
 
-curl -X DELETE -d '{"jobName":"testJob"}' http://localhost:3000/scheduler --header "Content-Type:application/json"
+curl -X DELETE -d '{"jobName":"testJob"}' http://localhost:3100/scheduler --header "Content-Type:application/json"
 ```
 
 ### scheduled job persistence
