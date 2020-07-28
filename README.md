@@ -7,7 +7,7 @@ Si tratta di un server a nodo singolo, che può essere installato anche in works
 
 È progettato e ottimizzato per raccogliere dati da varie fonti, tramite plugin detti connettori, ed è estendibile con nuovi connettore che possono essere sviluppati da terze parti.
 
-Il server è un progetto Open Source, spnsorizzato da [PagoPA spa](https://www.pagopa.gov.it/)
+Il server è un progetto Open Source, sponsorizzato da [PagoPA spa](https://www.pagopa.gov.it/) e gestito dall'[Associazione NoiOpen](https://noiopen.it)
 
 # Vuoi collaborare al progetto?
 
