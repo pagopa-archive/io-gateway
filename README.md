@@ -7,11 +7,21 @@ Si tratta di un server a nodo singolo, che può essere installato anche in works
 
 È progettato e ottimizzato per raccogliere dati da varie fonti, tramite plugin detti connettori, ed è estendibile con nuovi connettore che possono essere sviluppati da terze parti.
 
-Il server è un progetto Open Source, spnsorizzato da [PagoPA spa](https://www.pagopa.gov.it/)
+Il server è un progetto Open Source, spnsorizzato da [PagoPA spa](https://www.pagopa.gov.it/) ed è gestito dall'[Associazione NoiOpen](https://noiopen.it)
 
 # Vuoi collaborare al progetto?
 
-Aiutati a capirci qualcosa, mettendo le informazioni al posto giusto. Il posto giusto per idee e proposte è il wiki. Il posto giusto per discussioni è il forum. Il posto giusto per bug e cose da fare è lo issue tracker. 
+Innanzitutto aiutaci a capirci qualcosa, mettendo le informazioni al posto giusto. 
+
+Notare che il progetto ha:
+
+- [un repository principale su PagoPA stabile](https://github.com/noiopen/io-gateway) 
+- [un repository di lavoro su NoiOpen, sperimentale](https://github.com/noiopen/io-gateway)
+
+- Il posto giusto per idee e proposte è la [categoria IoGateway nel wiki NoiOpen](https://wiki.noiopen.it/wiki/IoGateway)
+- Il posto giusto per discussioni è la [categoria IoGateway nel forum di NoiOpen](https://wiki.noiopen.it/wiki/IoGateway)
+- Il posto giusto per bug e feature requests è lo [issue tracker su PagoPa](https://github.com/noiopen/io-gateway/issues)
+- Il posto giusto per farsi assegnare un task è lo [issue tracker su NoiOpen](https://github.com/noiopen/io-gateway/issues)
 
 Per favore:
 
