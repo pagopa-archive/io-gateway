@@ -10,7 +10,8 @@ Il server è un progetto Open Source, sponsorizzato da [PagoPA spa](https://www.
 
 ## Risorse Utente
 
--   [File di installazione] e [Documentazione Installazione]  
+-   [File di installazione] 
+-   [Documentazione Installazione]  
 -   [Documentazione Utente] 
 -   [Issue tracker principale] per bug reports e feature requests
 -   [Repository principale] per la distribuzione dei sorgenti
@@ -19,7 +20,7 @@ Il server è un progetto Open Source, sponsorizzato da [PagoPA spa](https://www.
     [Documentazione Utente]: https://github.com/pagopa/io-sdk/blob/master/docs/utente.md
     [Documentazione Installazione]: https://github.com/pagopa/io-sdk/blob/master/docs/amministratore.md
     [Issue tracker principale]: https://github.com/noiopen/io-gateway/issues
-    [Repository principale]: https://github.com/pagopa/io-gateway
+    [Repository principale]: https://github.com/pagopa/io-sdk
 
 ## Risorse Sviluppatori
 
