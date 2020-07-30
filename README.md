@@ -1,8 +1,6 @@
 # IO-Gateway
 
-**NOTA** Progetto in fase di sviluppo, non ancora utilizzabile.
-
-IO-Gateway è un server per l'invio di messaggi ai cittadini italiani usando l'[app IO](https://io.italia.it/), l'app dei servizi pubblici italiani.
+IO-Gateway  (precedentemete IO-SDK) è un server per l'invio di messaggi ai cittadini italiani usando l'[app IO](https://io.italia.it/), l'app dei servizi pubblici italiani.
 
 Si tratta di un server a nodo singolo, progettato per l'uso periferico e decentralizzato, che può essere installato anche in workstation o server interni ai datacenter delle pubbliche amministrazioni.
 
