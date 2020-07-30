@@ -27,7 +27,7 @@ Il server è un progetto Open Source, sponsorizzato da [PagoPA spa](https://www.
 -   [Repository di sviluppo] nel GitHub di NoiOpen 
 -   [Gestione progetti] e [Issue tracker di sviluppo] 
 
-  [Home Page]: https://wiki.noiopen.it/wiki/IoGateWay
+  [Home Page]: https://wiki.noiopen.it/wiki/IoGateway
   [Categoria di discussione]: https://noiopen.discourse.group/c/progetti/iogateway/18
   [Repository di sviluppo]: https://github.com/noiopen/io-gateway
   [Issue tracker di sviluppo]: https://github.com/noiopen/io-gateway/issues
