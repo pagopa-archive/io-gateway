@@ -12,7 +12,7 @@ pkg: $(SDK) $(WSK)
 $(SDK):
 	mkdir -p $(BIN)
 	GOOS=darwin GOARCH=amd64 go build \
-	-o $(SDK) -ldflags "-X main.Version=$(IOSDK_VER)" ../.. 
+	-o $(SDK) -ldflags "-X main.Version=$(IOSDK_VER) -X main.DockerHubUser=$(DOCKER_USER)" ../.. 
 
 $(WSK):
 	mkdir -p $(BIN)

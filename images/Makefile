@@ -1,9 +1,10 @@
 VER=2020.06.08
 REPO=https://github.com/sciabarracom/openwhisk
 BRANCH=debugger
-WHISK=pagopa/openwhisk-standalone:$(VER)
+DOCKER_USER?=dilox
+WHISK=$(DOCKER_USER)/openwhisk-standalone:$(VER)
 BUILDER=pagopa/builder-fpm-nsis:$(VER)
-THEIA=pagopa/theia:$(VER)
+THEIA=$(DOCKER_USER)/theia:$(VER)
 
 .PHONY: all builder openwhisk theia
 

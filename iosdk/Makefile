@@ -1,7 +1,7 @@
 IOSDK_VER?=$(shell git rev-parse --abbrev-ref HEAD)
 
 iosdk: $(shell ls *.go)
-	go build -ldflags "-X main.Version=$(IOSDK_VER)" -o iosdk
+	go build -ldflags "-X main.Version=$(IOSDK_VER) -X main.DockerHubUser=$(DOCKER_USER)" -o iosdk
 
 .PHONY: test clean
 test:

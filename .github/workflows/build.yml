@@ -16,6 +16,7 @@ jobs:
         NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
         USER_PASS: ${{ secrets.USER_PASS }}
         DOCKER_TOKEN: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
+        DOCKER_USER: ${{secrets.DOCKER_HUB_USERNAME}}        
     - name: WaitPre
       run: if grep pre .github/ngrok ; then bash .github/wait.sh ; fi
    
@@ -23,10 +24,11 @@ jobs:
       shell: bash
       env: 
         DOCKER_TOKEN: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
+        DOCKER_USER: ${{secrets.DOCKER_HUB_USERNAME}}
       run: |
         bash setup.sh
         source source-me-first
-        docker login -u iosdk -p "$DOCKER_TOKEN"
+        docker login -u "$DOCKER_USER" -p "$DOCKER_TOKEN"
         make
         make push
 
@@ -35,6 +37,8 @@ jobs:
       env:
         NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
         USER_PASS: ${{ secrets.USER_PASS }}
+        DOCKER_USER: ${{secrets.DOCKER_HUB_USER}}
         DOCKER_TOKEN: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
     - name: WaitPost
       run: if grep post .github/ngrok ; then bash .github/wait.sh ; fi
+      

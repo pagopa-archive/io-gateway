@@ -18,13 +18,13 @@ const MinDockerVersion = "18.06.3-ce"
 const BrowserURL = "http://localhost:3280/"
 
 // DockerHubUser is the Docker Hub User to use
-const DockerHubUser = "pagopa"
+//const DockerHubUser = "pagopa"
 
 // IdeImage is the image for the ide
-const IdeImage = DockerHubUser + "/iosdk-theia"
+var IdeImage = DockerHubUser + "/iosdk-theia"
 
 // WhiskImage is the openwhisk image
-const WhiskImage = DockerHubUser + "/iosdk-openwhisk"
+var WhiskImage = DockerHubUser + "/iosdk-openwhisk"
 
 // RedisImage is the image for redis
 const RedisImage = "library/redis:5"
