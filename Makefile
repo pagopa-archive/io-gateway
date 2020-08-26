@@ -1,5 +1,5 @@
 VER?=$(shell git tag --points-at HEAD | head -1)
-DOCKER_USER?=dilox
+DOCKER_USER?=$(shell git remote | grep -v noiopen | grep -v pagopa | head -1)
 
 .PHONY: preflight branch build test release release_mac snapshot all clean
 branch:
