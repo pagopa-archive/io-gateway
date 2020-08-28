@@ -8,7 +8,7 @@ all: bin/iosdk bin/wsk
 bin/iosdk:
 	mkdir -p bin
 	GOOS=linux GOARCH=amd64 go build \
-	-o bin/iosdk -ldflags "-X main.Version=$(IOSDK_VER)" ../..
+	-o bin/iosdk -ldflags "-X main.Version=$(IOSDK_VER) -X main.DockerHubUser=$(DOCKER_USER)" ../..
 
 bin/wsk:
 	mkdir -p bin

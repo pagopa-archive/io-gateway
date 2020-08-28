@@ -13,6 +13,10 @@ import (
 // VerboseFlag is flag for verbose
 
 var (
+
+	//DockerHubUser changed by ldflags
+	DockerHubUser = "pagopa"
+
 	// TestModeFlag enable behaviours useful for testing
 
 	// global flags

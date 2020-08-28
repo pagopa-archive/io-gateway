@@ -1,4 +1,5 @@
 VER?=$(shell git tag --points-at HEAD | head -1)
+DOCKER_USER?=$(shell git remote | grep -v noiopen | grep -v pagopa | head -1)
 
 .PHONY: preflight branch build test release release_mac snapshot all clean
 branch:
@@ -7,30 +8,30 @@ branch:
 
 release:
 	test -n "$(VER)"
-	$(MAKE) IOSDK_VER=$(VER) build
+	$(MAKE) IOSDK_VER=$(VER) DOCKER_USER=$(DOCKER_USER) build
 	$(MAKE) test
-	$(MAKE) IOSDK_VER=$(VER) push
-	$(MAKE) IOSDK_VER=$(VER) -C iosdk/setup/linux
-	$(MAKE) IOSDK_VER=$(VER) -C iosdk/setup/windows
+	$(MAKE) IOSDK_VER=$(VER) DOCKER_USER=$(DOCKER_USER) push
+	$(MAKE) IOSDK_VER=$(VER) DOCKER_USER=$(DOCKER_USER) -C iosdk/setup/linux
+	$(MAKE) IOSDK_VER=$(VER) DOCKER_USER=$(DOCKER_USER) -C iosdk/setup/windows
 
 release_mac:
 	test -n "$(VER)"
-	$(MAKE) IOSDK_VER=$(VER) -C iosdk/setup/mac
+	$(MAKE) IOSDK_VER=$(VER) DOCKER_USER=$(DOCKER_USER) -C iosdk/setup/mac
 
 clean:
 	-$(MAKE) -C admin clean
 	-$(MAKE) -C ide clean
 	-$(MAKE) -C iosdk clean
-	
+
 build: preflight
-	$(MAKE) -C admin
-	$(MAKE) -C ide
-	$(MAKE) -C iosdk
+	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C admin
+	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C ide
+	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C iosdk
 
 push:
 	docker login
-	$(MAKE) -C admin push
-	$(MAKE) -C ide push
+	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C admin push
+	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C ide push
 
 test:
 	# test cli
@@ -51,3 +52,4 @@ preflight:
 	node -v | grep v12
 	python3 -V | grep 3.7
 	go version | grep go1.13
+

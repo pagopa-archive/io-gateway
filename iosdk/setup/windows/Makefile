@@ -8,7 +8,7 @@ all: iosdk.exe wsk.exe
 
 iosdk.exe:
 	GOOS=windows GOARCH=amd64 go build \
-	-o iosdk.exe -ldflags "-X main.Version=$(IOSDK_VER)" ../.. 
+	-o iosdk.exe -ldflags "-X main.Version=$(IOSDK_VER) -X main.DockerHubUser=$(DOCKER_USER)" ../.. 
 
 wsk.exe:
 	curl -sL $(WSK) >wsk.zip
