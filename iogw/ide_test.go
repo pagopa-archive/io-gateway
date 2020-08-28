@@ -14,16 +14,16 @@ func ExampleIdeDockerRun() {
 	fmt.Println(2, ideDockerRun("/tmp", ""))
 	fmt.Println(3, ideDockerRun("", ""))
 	// Output:
-	// docker pull pagopa/iosdk-theia:test
-	// docker inspect --format={{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} iosdk-openwhisk
-	// docker run -d -p 3000:3000 --rm --name iosdk-theia -e HOME=/home/project -v /tmp:/home/project --add-host=openwhisk:172.17.0.2 pagopa/iosdk-theia:test
+	// docker pull pagopa/iogw-theia:test
+	// docker inspect --format={{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} iogw-openwhisk
+	// docker run -d -p 3000:3000 --rm --name iogw-theia -e HOME=/home/project -v /tmp:/home/project --add-host=openwhisk:172.17.0.2 pagopa/iogw-theia:test
 	// 1 <nil>
-	// docker pull pagopa/iosdk-theia:test
-	// docker inspect --format={{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} iosdk-openwhisk
+	// docker pull pagopa/iogw-theia:test
+	// docker inspect --format={{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} iogw-openwhisk
 	// 2 cannot find openwhisk
-	// docker pull pagopa/iosdk-theia:test
-	// docker inspect --format={{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} iosdk-openwhisk
-	// docker run -d -p 3000:3000 --rm --name iosdk-theia -e HOME=/home/project --add-host=openwhisk:172.17.0.2 pagopa/iosdk-theia:test
+	// docker pull pagopa/iogw-theia:test
+	// docker inspect --format={{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} iogw-openwhisk
+	// docker run -d -p 3000:3000 --rm --name iogw-theia -e HOME=/home/project --add-host=openwhisk:172.17.0.2 pagopa/iogw-theia:test
 	// 3 <nil>
 }
 
@@ -33,7 +33,7 @@ func ExampleIdeDockerRm() {
 	IdeDestroy()
 	// Output:
 	// Destroying IDE...
-	// docker kill iosdk-theia
+	// docker kill iogw-theia
 	// 172.17.0.3
 }
 

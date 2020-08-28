@@ -5,19 +5,19 @@ import (
 )
 
 func ExampleConfigLoad() {
-	run("rm -Rvf /tmp/iosdk-test ; mkdir /tmp/iosdk-test")
+	run("rm -Rvf /tmp/iogw-test ; mkdir /tmp/iogw-test")
 	fmt.Println(ConfigLoad())
 	DryRunPush("123456")
-	Configure("/tmp/iosdk-test/javascript")
+	Configure("/tmp/iogw-test/javascript")
 	fmt.Println(ConfigLoad())
-	fmt.Print(run("ls -a /tmp/iosdk-test/.io*"))
+	fmt.Print(run("ls -a /tmp/iogw-test/.io*"))
 	fmt.Println(Config.IoAPIKey)
 	fmt.Println(len(Config.WhiskAPIKey))
 	// Output:
-	// stat /tmp/iosdk-test/.iosdk.v3: no such file or directory
-	// Wrote /tmp/iosdk-test/.iosdk.v3
+	// stat /tmp/iogw-test/.iosdk.v3: no such file or directory
+	// Wrote /tmp/iogw-test/.iosdk.v3
 	// <nil>
-	// /tmp/iosdk-test/.iosdk.v3
+	// /tmp/iogw-test/.iosdk.v3
 	// 123456
 	// 101
 }

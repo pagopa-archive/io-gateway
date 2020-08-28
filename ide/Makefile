@@ -1,5 +1,6 @@
-IOSDK_VER?=$(shell git rev-parse --abbrev-ref HEAD)
-IMG=$(DOCKER_USER)/iosdk-theia:$(IOSDK_VER)
+IOGW_VER?=$(shell git rev-parse --abbrev-ref HEAD)
+DOCKER_USER?=pagopa
+IMG=$(DOCKER_USER)/iogw-theia:$(IOGW_VER)
 
 .PHONY: build
 build:
@@ -16,12 +17,12 @@ clean:
 .PHONY: start
 start:
 	docker run -ti \
-	--rm --name iosdk-theia \
-	--add-host openwhisk:$(shell docker inspect iosdk-openwhisk | jq -r '.[0].NetworkSettings.IPAddress') \
+	--rm --name iogw-theia \
+	--add-host openwhisk:$(shell docker inspect iogw-openwhisk | jq -r '.[0].NetworkSettings.IPAddress') \
 	-p 3000:3000 \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	$(IMG)
 
 .PHONY: stop
 stop:
-	-docker kill iosdk-theia
+	-docker kill iogw-theia

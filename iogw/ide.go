@@ -23,7 +23,7 @@ func IdeDeploy(dir string, info string) error {
 // IdeDestroy destroys ide
 func IdeDestroy() error {
 	fmt.Println("Destroying IDE...")
-	fmt.Println(Sys("docker kill iosdk-theia"))
+	fmt.Println(Sys("docker kill iogw-theia"))
 	return nil
 }
 
@@ -44,7 +44,7 @@ func ideDockerRun(dir string, info string) (err error) {
 		}
 	}
 
-	openwhiskIP := dockerIP("iosdk-openwhisk")
+	openwhiskIP := dockerIP("iogw-openwhisk")
 	if openwhiskIP == nil {
 		return fmt.Errorf("cannot find openwhisk")
 	}
@@ -64,7 +64,7 @@ func ideDockerRun(dir string, info string) (err error) {
 	}
 
 	command := fmt.Sprintf(`docker run -d -p 3000:3000
-	--rm --name iosdk-theia -e HOME=/home/project 
+	--rm --name iogw-theia -e HOME=/home/project 
 	%s %s --add-host=openwhisk:%s %s`, mount, uid, *openwhiskIP, image)
 	Sys(command)
 	return nil
@@ -72,7 +72,7 @@ func ideDockerRun(dir string, info string) (err error) {
 
 // OpenWhiskDockerWait wait for openwhisk to be
 func OpenWhiskDockerWait() error {
-	fmt.Println(Sys("docker exec iosdk-whisk waitready"))
+	fmt.Println(Sys("docker exec iogw-whisk waitready"))
 	return nil
 }
 

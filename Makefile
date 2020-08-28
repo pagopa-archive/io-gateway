@@ -1,5 +1,5 @@
 VER?=$(shell git tag --points-at HEAD | head -1)
-DOCKER_USER?=$(shell git remote | grep -v noiopen | grep -v pagopa | head -1)
+DOCKER_USER?=pagopa
 
 .PHONY: preflight branch build test release release_mac snapshot all clean
 branch:
@@ -8,25 +8,25 @@ branch:
 
 release:
 	test -n "$(VER)"
-	$(MAKE) IOSDK_VER=$(VER) DOCKER_USER=$(DOCKER_USER) build
+	$(MAKE) IOGW_VER=$(VER) DOCKER_USER=$(DOCKER_USER) build
 	$(MAKE) test
-	$(MAKE) IOSDK_VER=$(VER) DOCKER_USER=$(DOCKER_USER) push
-	$(MAKE) IOSDK_VER=$(VER) DOCKER_USER=$(DOCKER_USER) -C iosdk/setup/linux
-	$(MAKE) IOSDK_VER=$(VER) DOCKER_USER=$(DOCKER_USER) -C iosdk/setup/windows
+	$(MAKE) IOGW_VER=$(VER) DOCKER_USER=$(DOCKER_USER) push
+	$(MAKE) IOGW_VER=$(VER) DOCKER_USER=$(DOCKER_USER) -C iogw/setup/linux
+	$(MAKE) IOGW_VER=$(VER) DOCKER_USER=$(DOCKER_USER) -C iogw/setup/windows
 
 release_mac:
 	test -n "$(VER)"
-	$(MAKE) IOSDK_VER=$(VER) DOCKER_USER=$(DOCKER_USER) -C iosdk/setup/mac
+	$(MAKE) IOGW_VER=$(VER) DOCKER_USER=$(DOCKER_USER) -C iogw/setup/mac
 
 clean:
 	-$(MAKE) -C admin clean
 	-$(MAKE) -C ide clean
-	-$(MAKE) -C iosdk clean
+	-$(MAKE) -C iogw clean
 
 build: preflight
 	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C admin
 	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C ide
-	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C iosdk
+	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C iogw
 
 push:
 	docker login
@@ -35,7 +35,7 @@ push:
 
 test:
 	# test cli
-	make -C iosdk test
+	make -C iogw test
 	# test execution
 	bash test.sh
 	# test actions
@@ -51,5 +51,4 @@ preflight:
 	echo "checking required versions"
 	node -v | grep v12
 	python3 -V | grep 3.7
-	go version | grep go1.13
-
+	go version | grep go1.14

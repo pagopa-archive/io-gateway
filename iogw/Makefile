@@ -1,7 +1,8 @@
-IOSDK_VER?=$(shell git rev-parse --abbrev-ref HEAD)
+IOGW_VER?=$(shell git rev-parse --abbrev-ref HEAD)
+DOCKER_USER?=pagopa
 
-iosdk: $(shell ls *.go)
-	go build -ldflags "-X main.Version=$(IOSDK_VER) -X main.DockerHubUser=$(DOCKER_USER)" -o iosdk
+iogw: $(shell ls *.go)
+	go build -ldflags "-X main.Version=$(IOGW_VER) -X main.DockerHubUser=$(DOCKER_USER)" -o iogw
 
 .PHONY: test clean
 test:
@@ -9,5 +10,5 @@ test:
 	python3 difftest.py
 
 clean:
-	-rm iosdk
-	-rm setup/windows/iosdk.exe
+	-rm iogw
+	-rm setup/windows/iogw.exe

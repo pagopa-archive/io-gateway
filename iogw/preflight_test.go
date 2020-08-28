@@ -24,12 +24,12 @@ func ExampleEnsureDockerVersion() {
 
 func ExampleInHomePath() {
 	// *DryRunFlag = false
-	fmt.Println(preflightInHomePath("/tmp/iosdk-test/openwhisk-ide"))
+	fmt.Println(preflightInHomePath("/tmp/iogw-test/openwhisk-ide"))
 	fmt.Println(preflightInHomePath("/var/run"))
 	fmt.Println(preflightInHomePath(""))
 	// Output:
 	// <nil>
-	// work directory /var/run should be below your home directory /tmp/iosdk-test;
+	// work directory /var/run should be below your home directory /tmp/iogw-test;
 	// this is required to be accessible by Docker
 	// <nil>
 }

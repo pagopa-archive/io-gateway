@@ -1,5 +1,5 @@
-IOSDK_VER?=$(shell git rev-parse --abbrev-ref HEAD)
-IMG=$(DOCKER_USER)/iosdk-openwhisk:$(IOSDK_VER)
+IOGW_VER?=$(shell git rev-parse --abbrev-ref HEAD)
+IMG=$(DOCKER_USER)/iogw-openwhisk:$(IOGW_VER)
 
 .PHONE: build
 build: public/build/bundle.js
