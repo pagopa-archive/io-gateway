@@ -13,3 +13,7 @@ then export PATH="$LOCAL_BIN:$GOENV_ROOT/bin:$NODENV_ROOT/bin:$PYENV_ROOT/bin:$P
      go version
 else echo "You need to run 'bash setup.sh' first"
 fi
+if [[ -z "$DOCKER_USER" ]] || [[ -z "DOCKER_TOKEN" ]]
+then echo "ERROR: You need to set DOCKER_USER and DOCKER_TOKEN either as environment variables or GitHub secrets to be able to push images"
+else echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USER" --password-stdin
+fi

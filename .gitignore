@@ -1,4 +1,5 @@
-iosdk/iosdk
+source-me
+iogw/iogw
 images/openwhisk/
 .DS_Store
 .version

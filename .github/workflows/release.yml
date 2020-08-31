@@ -55,12 +55,11 @@ jobs:
       - name: Build
         id: build
         env:
-          DOCKER_HUB_ACCESS_TOKEN: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
-          DOCKER_HUB_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
+          DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
         run: |
           bash setup.sh
           source source-me-first
-          docker login -u "$DOCKER_HUB_USERNAME" -p "$DOCKER_HUB_ACCESS_TOKEN"
           sudo apt-get install -y alien
           make release
           DEBPATH=$(ls iosdk/setup/linux/deb/iosdk_*.deb)
