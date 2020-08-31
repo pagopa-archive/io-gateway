@@ -42,10 +42,10 @@ test:
 	make -C admin/actions test
 
 snapshot:
-	date "+%Y.%m%d.%H%M-snapshot" >.snapshot
-	git tag "$(shell cat .snapshot)"
+	date "+%Y.%m%d.%H%M-snapshot" | tee .snapshot
+	cat .snapshot | xargs git tag 
 	git push origin --tags
-	git tag -d "$(shell cat .snapshot)"
+	cat .snapshot | xargs git tag -d 
 
 preflight:
 	echo "checking required versions"
