@@ -51,4 +51,4 @@ preflight:
 	echo "checking required versions"
 	node -v | grep v12
 	python3 -V | grep 3.7
-	go version | grep go1.14
+	go version | grep go1.15

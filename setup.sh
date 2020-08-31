@@ -1,5 +1,7 @@
 #!/bin/bash
-set -e
+
+DOCKER_USER=${1:?docker hub user}
+DOCKER_TOKEN=${2:?docker hub access token}
 
 export NODENV_VERSION=12.18.0
 export PYENV_VERSION=3.7.7
@@ -71,6 +73,9 @@ echo $PYENV_VERSION >.python-version
 eval "$(goenv init -)"
 goenv install $GOENV_VERSION -s
 echo $GOENV_VERSION >.go-version
+
+echo "DOCKER_USER=$DOCKER_USER" >.env
+echo "DOCKER_TOKEN=$DOCKER_TOKEN" >>.env
 
 # etc
 

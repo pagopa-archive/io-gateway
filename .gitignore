@@ -7,6 +7,7 @@ images/openwhisk/
 .node-version
 .go-version
 .python-version
+.env
 node_modules/
 __pycache__/
 old/

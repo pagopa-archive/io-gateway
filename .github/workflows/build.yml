@@ -26,7 +26,7 @@ jobs:
         DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
         DOCKER_USER: ${{secrets.DOCKER_USER}}
       run: |
-        bash setup.sh
+        bash setup.sh "$DOCKER_USER" "$DOCKER_TOKEN"
         source source-me-first
         make
         make push
