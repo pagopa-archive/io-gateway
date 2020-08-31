@@ -42,7 +42,7 @@ test:
 	make -C admin/actions test
 
 snapshot:
-	date +%Y.%m%d.%H%M-snapshot >.snapshot
+	date "+%Y.%m%d.%H%M-snapshot" >.snapshot
 	git tag "$(shell cat .snapshot)"
 	git push origin --tags
 	git tag -d "$(shell cat .snapshot)"
