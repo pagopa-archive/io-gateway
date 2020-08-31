@@ -3,7 +3,7 @@ set -e
 
 export NODENV_VERSION=12.18.0
 export PYENV_VERSION=3.7.7
-export GOENV_VERSION=1.13.12
+export GOENV_VERSION=1.15.0
 export LOCAL="$HOME/.local"
 export BIN="$LOCAL/bin"
 mkdir -p "$BIN"
