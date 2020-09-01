@@ -14,22 +14,25 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v1
         with:
-          go-version: '1.13'
+          go-version: '1.15'
         id: go
 
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
 
       - name: Build
+        env:
+          DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
+          DOCKER_USER: ${{secrets.DOCKER_USER}} 
         run: |
           make release_mac
 
       - name: Create Artifacts File
         id: mac_artifact
         run: |
-          sudo ln -s iosdk/setup/mac/target/pkg/*.pkg iosdk.pkg
-          MACPATH=$(ls iosdk/setup/mac/target/pkg/*.pkg)
-          MACNAME=$(basename iosdk/setup/mac/target/pkg/*.pkg)
+          sudo ln -s iogw/setup/mac/target/pkg/*.pkg iosdk.pkg
+          MACPATH=$(ls iogw/setup/mac/target/pkg/*.pkg)
+          MACNAME=$(basename iogw/setup/mac/target/pkg/*.pkg)
           echo MACPATH=${MACPATH} > mac_variables.sh
           echo MACNAME=${MACNAME} >> mac_variables.sh
 
@@ -37,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: mac_artifact
-          path: iosdk.pkg
+          path: iogw.pkg
 
       - name: Upload Release mac variables as Artifact
         uses: actions/upload-artifact@v1
@@ -62,12 +65,12 @@ jobs:
           source source-me-first
           sudo apt-get install -y alien
           make release
-          DEBPATH=$(ls iosdk/setup/linux/deb/iosdk_*.deb)
-          DEBNAME=$(basename iosdk/setup/linux/deb/iosdk_*.deb)
-          RPMPATH=$(ls iosdk/setup/linux/rpm/iosdk-*.rpm)
-          RPMNAME=$(basename iosdk/setup/linux/rpm/iosdk-*.rpm)
-          WINPATH=$(ls iosdk/setup/windows/iosdk_*.exe)
-          WINNAME=$(basename iosdk/setup/windows/iosdk_*.exe)
+          DEBPATH=$(ls iogw/setup/linux/deb/iogw_*.deb)
+          DEBNAME=$(basename iogw/setup/linux/deb/iogw_*.deb)
+          RPMPATH=$(ls iogw/setup/linux/rpm/iogw-*.rpm)
+          RPMNAME=$(basename iogw/setup/linux/rpm/iogw-*.rpm)
+          WINPATH=$(ls iogw/setup/windows/iogw_*.exe)
+          WINNAME=$(basename iogw/setup/windows/iogw_*.exe)
           echo ::set-output name=deb_path::${DEBPATH}
           echo ::set-output name=deb_name::${DEBNAME}
           echo ::set-output name=rpm_path::${RPMPATH}

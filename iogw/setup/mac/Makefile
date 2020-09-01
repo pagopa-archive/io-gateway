@@ -7,7 +7,7 @@ SDK=$(BIN)/iogw
 
 .PHONY: pkg
 pkg: $(SDK) $(WSK)
-	bash build-macos-x64.sh IOGW $(IOGW_VER)
+	bash build-macos-x64.sh iogw $(IOGW_VER)
 
 $(SDK):
 	mkdir -p $(BIN)

@@ -12,3 +12,4 @@ test:
 clean:
 	-rm iogw
 	-rm setup/windows/iogw.exe
+	-rm -Rvf setup/mac/application setup/mac/target
