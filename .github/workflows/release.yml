@@ -30,7 +30,7 @@ jobs:
       - name: Create Artifacts File
         id: mac_artifact
         run: |
-          sudo ln -s iogw/setup/mac/target/pkg/*.pkg iosdk.pkg
+          sudo ln -s iogw/setup/mac/target/pkg/*.pkg iogw.pkg
           MACPATH=$(ls iogw/setup/mac/target/pkg/*.pkg)
           MACNAME=$(basename iogw/setup/mac/target/pkg/*.pkg)
           echo MACPATH=${MACPATH} > mac_variables.sh
