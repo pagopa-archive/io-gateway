@@ -74,8 +74,8 @@ eval "$(goenv init -)"
 goenv install $GOENV_VERSION -s
 echo $GOENV_VERSION >.go-version
 
-echo "DOCKER_USER=$DOCKER_USER" >.env
-echo "DOCKER_TOKEN=$DOCKER_TOKEN" >>.env
+echo "export DOCKER_USER=$DOCKER_USER" >.env
+echo "export DOCKER_TOKEN=$DOCKER_TOKEN" >>.env
 
 # etc
 
