@@ -11,12 +11,21 @@ release:
 	$(MAKE) IOGW_VER=$(VER) DOCKER_USER=$(DOCKER_USER) build
 	$(MAKE) test
 	$(MAKE) IOGW_VER=$(VER) DOCKER_USER=$(DOCKER_USER) push
-	$(MAKE) IOGW_VER=$(VER) DOCKER_USER=$(DOCKER_USER) -C iogw/setup/linux
-	$(MAKE) IOGW_VER=$(VER) DOCKER_USER=$(DOCKER_USER) -C iogw/setup/windows
+	$(MAKE) release_lin
+	$(MAKE) release_win
 
 release_mac:
 	test -n "$(VER)"
 	$(MAKE) IOGW_VER=$(VER) DOCKER_USER=$(DOCKER_USER) -C iogw/setup/mac
+
+release_win:
+	test -n "$(VER)"
+	$(MAKE) IOGW_VER=$(VER) DOCKER_USER=$(DOCKER_USER) -C iogw/setup/windows
+
+release_lin:
+	test -n "$(VER)"
+	$(MAKE) IOGW_VER=$(VER) DOCKER_USER=$(DOCKER_USER) -C iogw/setup/linux
+
 
 clean:
 	-$(MAKE) -C admin clean

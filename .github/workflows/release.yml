@@ -70,7 +70,7 @@ jobs:
           RPMPATH=$(ls iogw/setup/linux/rpm/iogw-*.rpm)
           RPMNAME=$(basename iogw/setup/linux/rpm/iogw-*.rpm)
           WINPATH=$(ls iogw/setup/windows/iogw-*.exe)
-          WINNAME=$(basename iogw/setup/windows/iogw_*.exe)
+          WINNAME=$(basename iogw/setup/windows/iogw-*.exe)
           echo ::set-output name=deb_path::${DEBPATH}
           echo ::set-output name=deb_name::${DEBNAME}
           echo ::set-output name=rpm_path::${RPMPATH}
