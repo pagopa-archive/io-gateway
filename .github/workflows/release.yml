@@ -30,11 +30,11 @@ jobs:
       - name: Create Artifacts File
         id: mac_artifact
         run: |
-          sudo ln -s iogw/setup/mac/target/pkg/*.pkg iogw.pkg
           MACPATH=$(ls iogw/setup/mac/*.pkg)
           MACNAME=$(basename $MACPATH)
           MACBUILD=iogw/setup/mac/application/bin/iogw
           MACEXE=iogw_mac
+          sudo ln -s $MACPATH iogw.pkg
           echo MACPATH=${MACPATH} > mac_variables.sh
           echo MACNAME=${MACNAME} >> mac_variables.sh
           echo MACBUILD=${MACBUILD} >> mac_variables.sh
@@ -68,7 +68,9 @@ jobs:
           bash setup.sh "$DOCKER_USER" "$DOCKER_TOKEN"
           source source-me-first
           sudo apt-get install -y alien
-          make release
+          #make release_images
+          make release_lin
+          make release_win
           DEBPATH=$(ls iogw/setup/linux/deb/iogw_*.deb)
           DEBNAME=$(basename $DEBPATH)
           RPMPATH=$(ls iogw/setup/linux/rpm/iogw-*.rpm)
