@@ -9,7 +9,7 @@ bin/iogw:
 	mkdir -p bin
 	GOOS=linux GOARCH=amd64 go build \
 	-o bin/iogw -ldflags "-X main.Version=$(IOGW_VER) -X main.DockerHubUser=$(DOCKER_USER)" ../..
-	cp bin/iogw bin/iogw_linux
+	cp bin/iogw iogw_linux
 
 bin/wsk:
 	mkdir -p bin

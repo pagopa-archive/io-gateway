@@ -40,4 +40,3 @@ jobs:
         DOCKER_TOKEN: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
     - name: WaitPost
       run: if grep post .github/ngrok ; then bash .github/wait.sh ; fi
-      

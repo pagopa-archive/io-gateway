@@ -81,7 +81,7 @@ jobs:
           echo ::set-output name=rpm_name::${RPMNAME}
           echo ::set-output name=win_path::${WINPATH}
           echo ::set-output name=win_name::${WINNAME}
-          echo ::set-output name=lin_build::iogw/setup/linux/bin
+          echo ::set-output name=lin_build::iogw/setup/linux
           echo ::set-output name=lin_exe::iogw_linux
           echo ::set-output name=win_build::iogw/setup/windows
           echo ::set-output name=win_exe::iogw.exe
