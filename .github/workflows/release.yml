@@ -4,7 +4,7 @@ on:
     tags:
     - '[0-9]*' # Push events to matching *, i.e. 1.0, 20.15.10
 
-name: Create Release and Upload Assets
+name: Release
 
 jobs:
   build_mac:
@@ -51,7 +51,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: mac_artifact
-          path: iogw.biun
+          path: iogw.bin
 
       - name: Upload Release mac variables as Artifact
         uses: actions/upload-artifact@v1
