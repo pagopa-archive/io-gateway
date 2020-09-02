@@ -35,7 +35,7 @@ jobs:
           MACBUILD=iogw/setup/mac/application/bin/iogw
           MACEXE=iogw_mac
           sudo ln -s $MACPATH iogw.pkg
-          sudo ln -s $MACBUILD iogw
+          sudo ln -s $MACBUILD iogw.bin
           echo MACPATH=${MACPATH} > mac_variables.sh
           echo MACNAME=${MACNAME} >> mac_variables.sh
           echo MACBUILD=${MACBUILD} >> mac_variables.sh
@@ -51,7 +51,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: mac_artifact
-          path: iogw
+          path: iogw.biun
 
       - name: Upload Release mac variables as Artifact
         uses: actions/upload-artifact@v1
@@ -199,6 +199,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: mac_artifact/iogw
+          asset_path: mac_artifact/iogw.bin
           asset_name: ${{ steps.build.outputs.mac_exe }}
           asset_content_type: application/octet-stream

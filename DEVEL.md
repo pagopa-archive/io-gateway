@@ -85,7 +85,6 @@ This step is critical.
 
 After installation follow [these instructions](https://docs.docker.com/docker-for-windows/wsl/) to use the Docker running in Windows as the Docker to use in WSL.
 
-
 ## Setup the local development environmewnt
 
 If the prerequisites are satisfied, you can setup and test the development environment as follows:
@@ -191,13 +190,3 @@ If you really need to change them, you need to get a password to write in some p
 They are tagged with the date you built them. If you change the tag you will also have to change the tag in `admin/Dockerfile` and `ide/Dockerfile`
 
 The process is manual because it is infrequent and needs awareness of what you are doing.
-
-## Automating with DockerHub and GitHub
-
-### Docker Hub account
-
-Register on `hub.docker.com` an account. Go on security and generate a new access token.
-
-Set locally in your .profile the environment variables `DOCKER_USER` and `DOCKER_TOKEN`. 
-
-Furthermore to automate the process in GitHub add 

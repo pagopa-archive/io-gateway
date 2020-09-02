@@ -6,11 +6,6 @@ branch:
 	$(MAKE) build 
 	$(MAKE) test
 
-release:
-	$(MAKE) release_image
-	$(MAKE) release_lin
-	$(MAKE) release_win
-
 release_images:
 	test -n "$(VER)"
 	$(MAKE) IOGW_VER=$(VER) DOCKER_USER=$(DOCKER_USER) build
