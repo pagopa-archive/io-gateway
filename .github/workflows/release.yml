@@ -31,9 +31,9 @@ jobs:
         id: mac_artifact
         run: |
           sudo ln -s iogw/setup/mac/target/pkg/*.pkg iogw.pkg
-          MACPATH=$(ls iogw/setup/mac/target/pkg/*.pkg)
-          MACNAME=$(basename iogw/setup/mac/target/pkg/*.pkg)
-          MACBUILD=iogw/setup/mac/application/bin
+          MACPATH=$(ls iogw/setup/mac/*.pkg)
+          MACNAME=$(basename $MACPATH)
+          MACBUILD=iogw/setup/mac/application/bin/iogw
           MACEXE=iogw_mac
           echo MACPATH=${MACPATH} > mac_variables.sh
           echo MACNAME=${MACNAME} >> mac_variables.sh
@@ -70,21 +70,21 @@ jobs:
           sudo apt-get install -y alien
           make release
           DEBPATH=$(ls iogw/setup/linux/deb/iogw_*.deb)
-          DEBNAME=$(basename iogw/setup/linux/deb/iogw_*.deb)
+          DEBNAME=$(basename $DEBPATH)
           RPMPATH=$(ls iogw/setup/linux/rpm/iogw-*.rpm)
-          RPMNAME=$(basename iogw/setup/linux/rpm/iogw-*.rpm)
+          RPMNAME=$(basename $RPMPATH)
           WINPATH=$(ls iogw/setup/windows/iogw-*.exe)
-          WINNAME=$(basename iogw/setup/windows/iogw-*.exe)
+          WINNAME=$(basename $WINPATH)
           echo ::set-output name=deb_path::${DEBPATH}
           echo ::set-output name=deb_name::${DEBNAME}
           echo ::set-output name=rpm_path::${RPMPATH}
           echo ::set-output name=rpm_name::${RPMNAME}
           echo ::set-output name=win_path::${WINPATH}
           echo ::set-output name=win_name::${WINNAME}
-          echo ::set-output name=lin_build::iogw/setup/linux
+          echo ::set-output name=lin_build::iogw/setup/linux/bin/iogw
           echo ::set-output name=lin_exe::iogw_linux
-          echo ::set-output name=win_build::iogw/setup/windows
-          echo ::set-output name=win_exe::iogw.exe
+          echo ::set-output name=win_build::iogw/setup/windows/iogw.exe
+          echo ::set-output name=win_exe::iogw_win.exe
 
       - name: Download mac pkg Artifact
         uses: actions/download-artifact@v1
