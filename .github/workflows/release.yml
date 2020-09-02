@@ -33,13 +33,10 @@ jobs:
           MACPATH=$(ls iogw/setup/mac/*.pkg)
           MACNAME=$(basename $MACPATH)
           MACBUILD=iogw/setup/mac/application/bin/iogw
-          MACEXE=iogw_mac
-          sudo ln -s $MACPATH iogw.pkg
-          sudo ln -s $MACBUILD iogw.bin
-          echo MACPATH=${MACPATH} > mac_variables.sh
+          sudo ln -sf $MACPATH iogw.pkg
+          sudo ln -sf $MACBUILD iogw.bin
           echo MACNAME=${MACNAME} >> mac_variables.sh
-          echo MACBUILD=${MACBUILD} >> mac_variables.sh
-          echo MACEXE=${MACEXE} >> mac_variables.sh
+          echo MACEXE=iogw_mac >> mac_variables.sh
 
       - name: Upload Release pkg file as Artifact
         uses: actions/upload-artifact@v1
@@ -75,7 +72,6 @@ jobs:
           bash setup.sh "$DOCKER_USER" "$DOCKER_TOKEN"
           source source-me-first
           sudo apt-get install -y alien
-          #make release_images
           make release_lin
           make release_win
           DEBPATH=$(ls iogw/setup/linux/deb/iogw_*.deb)
@@ -109,9 +105,7 @@ jobs:
         id: mac_variables
         run: |
           source variables/mac_variables.sh
-          echo ::set-output name=mac_path::${MACPATH}
           echo ::set-output name=mac_name::${MACNAME}
-          echo ::set-output name=mac_build::${MACBUILD}
           echo ::set-output name=mac_exe::${MACEXE}
 
       - name: Create Release
@@ -198,7 +192,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: mac_artifact/iogw.bin
           asset_name: ${{ steps.build.outputs.mac_exe }}
           asset_content_type: application/octet-stream

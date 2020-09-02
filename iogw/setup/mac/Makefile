@@ -22,4 +22,5 @@ $(WSK):
 
 clean:
 	-rm -Rvf target application
+	-rm *.pkg *.bin
 
