@@ -14,4 +14,7 @@ wsk.exe:
 	curl -sL $(WSK) >wsk.zip
 	unzip wsk.zip wsk.exe
 
+clean:
+	-rm *.zip *.exe
+
 

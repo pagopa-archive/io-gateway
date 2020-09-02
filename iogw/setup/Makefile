@@ -15,9 +15,9 @@ windows:
 	$(MAKE) IOGW_VER=$(IOGW_VER) -C windows
 
 clean:
-	-rm -Rvf linux/deb linux/rpm 
-	-rm windows/*.zip windows/*.exe
-	-rm -Rvf mac/target mac/application
+	$(MAKE) clean -C windows
+	$(MAKE) clean -C linux
+	$(MAKE) clean -C mac
 
 builder-fpm-nsis:
 	docker build -t pagopa/builder-fpm-nsis .

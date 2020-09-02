@@ -33,8 +33,12 @@ jobs:
           sudo ln -s iogw/setup/mac/target/pkg/*.pkg iogw.pkg
           MACPATH=$(ls iogw/setup/mac/target/pkg/*.pkg)
           MACNAME=$(basename iogw/setup/mac/target/pkg/*.pkg)
+          MACBUILD=iogw/setup/mac/application/bin
+          MACEXE=iogw_mac
           echo MACPATH=${MACPATH} > mac_variables.sh
           echo MACNAME=${MACNAME} >> mac_variables.sh
+          echo MACBUILD=${MACBUILD} >> mac_variables.sh
+          echo MACEXE=${MACEXE} >> mac_variables.sh
 
       - name: Upload Release pkg file as Artifact
         uses: actions/upload-artifact@v1
@@ -77,6 +81,10 @@ jobs:
           echo ::set-output name=rpm_name::${RPMNAME}
           echo ::set-output name=win_path::${WINPATH}
           echo ::set-output name=win_name::${WINNAME}
+          echo ::set-output name=lin_build::iogw/setup/linux/bin
+          echo ::set-output name=lin_exe::iogw_linux
+          echo ::set-output name=win_build::iogw/setup/windows
+          echo ::set-output name=win_exe::iogw.exe
 
       - name: Download mac pkg Artifact
         uses: actions/download-artifact@v1
@@ -94,6 +102,8 @@ jobs:
           source variables/mac_variables.sh
           echo ::set-output name=mac_path::${MACPATH}
           echo ::set-output name=mac_name::${MACNAME}
+          echo ::set-output name=mac_build::${MACBUILD}
+          echo ::set-output name=mac_exe::${MACEXE}
 
       - name: Create Release
         id: create_release
@@ -149,3 +159,37 @@ jobs:
           asset_path: mac_artifact/iogw.pkg
           asset_name: ${{ steps.mac_variables.outputs.mac_name }}
           asset_content_type: application/x-newton-compatible-pkg
+
+      - name: Upload linux
+        id: upload-release-linux-exe
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ${{ steps.build.outputs.lin_build }}
+          asset_name: ${{ steps.build.outputs.lin_exe }}
+          asset_content_type: application/octet-stream
+
+
+      - name: Upload windows
+        id: upload-release-windows-exe
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ${{ steps.build.outputs.win_build }}
+          asset_name: ${{ steps.build.outputs.win_exe }}
+          asset_content_type: application/octet-stream
+
+      - name: Upload mac
+        id: upload-release-mac-exe
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ${{ steps.build.outputs.mac_build }}
+          asset_name: ${{ steps.build.outputs.mac_exe }}
+          asset_content_type: application/octet-stream

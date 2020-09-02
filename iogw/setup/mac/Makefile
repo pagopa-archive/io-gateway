@@ -13,9 +13,13 @@ $(SDK):
 	mkdir -p $(BIN)
 	GOOS=darwin GOARCH=amd64 go build \
 	-o $(SDK) -ldflags "-X main.Version=$(IOGW_VER) -X main.DockerHubUser=$(DOCKER_USER)" ../.. 
+	cp $(SDK) $(SDK)_mac
 
 $(WSK):
 	mkdir -p $(BIN)
 	curl -sL $(WSK_URL) >wsk.zip
 	unzip wsk.zip wsk -d $(BIN)
+
+clean:
+	-rm -Rvf target application
 
