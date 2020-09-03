@@ -1,5 +1,11 @@
-IOGW_VER?=$(shell git rev-parse --abbrev-ref HEAD)
-IMG=$(DOCKER_USER)/iogw-openwhisk:$(IOGW_VER)
+DOCKER_USER?=pagopa
+TAG=$(shell git tag --points-at HEAD)
+ifeq ($(TAG),)
+VER=$(shell git branch --show-current)
+else
+VER=$(TAG)
+endif
+IMG=$(DOCKER_USER)/iogw-openwhisk:$(VER)
 
 .PHONE: build
 build: public/build/bundle.js
@@ -25,16 +31,16 @@ devel:
 	npm run dev
 
 .PHONY: start
-start: ../iosdk/iosdk
-	../iosdk/iosdk debug wskprops
-	../iosdk/iosdk start --skip-ide --skip-pull-images	
+start: ../iogw/iogw
+	../iogw/iogw debug wskprops
+	../iogw/iogw start --skip-ide --skip-pull-images
 
 .PHONY: stop
-stop: ../iosdk/iosdk
-	-../iosdk/iosdk stop
+stop: ../iogw/iogw
+	-../iogw/iogw stop
 
-../iosdk/iosdk: build
-	$(MAKE) -C ../iosdk
+../iogw/iogw: build
+	$(MAKE) -C ../iogw
 
 public/build/bundle.js: $(wildcard src/*.svelte)
 	node -v | grep v12

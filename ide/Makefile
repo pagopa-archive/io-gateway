@@ -1,6 +1,11 @@
-IOGW_VER?=$(shell git rev-parse --abbrev-ref HEAD)
 DOCKER_USER?=pagopa
-IMG=$(DOCKER_USER)/iogw-theia:$(IOGW_VER)
+TAG=$(shell git tag --points-at HEAD)
+ifeq ($(TAG),)
+VER=$(shell git branch --show-current)
+else
+VER=$(TAG)
+endif
+IMG=$(DOCKER_USER)/iogw-theia:$(VER)
 
 .PHONY: build
 build:

@@ -1,4 +1,4 @@
-IOGW_VER?=$(shell git rev-parse --abbrev-ref HEAD)
+IOGW_VER?=$(shell git branch --show-current)
 DOCKER_USER?=pagopa
 
 iogw: $(shell ls *.go)
@@ -11,5 +11,6 @@ test:
 
 clean:
 	-rm iogw
-	-rm setup/windows/iogw.exe
-	-rm -Rvf setup/mac/application setup/mac/target
+	$(MAKE) -C setup/windows clean
+	$(MAKE) -C setup/linux clean
+	$(MAKE) -C setup/mac clean

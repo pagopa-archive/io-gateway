@@ -1,5 +1,10 @@
-VER?=$(shell git tag --points-at HEAD | head -1)
 DOCKER_USER?=pagopa
+TAG=$(shell git tag --points-at HEAD)
+ifeq ($(TAG),)
+VER=$(shell git branch --show-current)
+else
+VER=$(TAG)
+endif
 
 .PHONY: preflight branch build test release release_mac snapshot all clean
 branch:
@@ -23,7 +28,6 @@ release_win:
 release_lin:
 	test -n "$(VER)"
 	$(MAKE) IOGW_VER=$(VER) DOCKER_USER=$(DOCKER_USER) -C iogw/setup/linux
-
 
 clean:
 	-$(MAKE) -C admin clean
