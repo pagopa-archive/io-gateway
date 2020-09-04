@@ -6,7 +6,7 @@ else
 VER=$(TAG)
 endif
 ifeq ($(VER),)
-VER=pull-request-test
+VER=noversion
 endif
 
 .PHONY: preflight branch build test release release_mac snapshot all clean

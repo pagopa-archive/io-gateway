@@ -5,6 +5,9 @@ VER=$(shell git branch --show-current)
 else
 VER=$(TAG)
 endif
+ifeq ($(VER),)
+VER=noversion
+endif
 IMG=$(DOCKER_USER)/iogw-theia:$(VER)
 
 .PHONY: build
