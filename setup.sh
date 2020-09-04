@@ -1,7 +1,7 @@
 #!/bin/bash
 
-DOCKER_USER=${1:?docker hub user}
-DOCKER_TOKEN=${2:?docker hub access token}
+DOCKER_USER=${1:-pagopa}
+DOCKER_TOKEN=${2:-}
 
 export NODENV_VERSION=12.18.0
 export PYENV_VERSION=3.7.7
