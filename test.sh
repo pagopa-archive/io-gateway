@@ -1,6 +1,16 @@
 #!/bin/bash
+TAG=$(git tag --points-at HEAD)
+if test -z "$TAG"
+then VER=$(git branch --show-current)
+else VER=$TAG
+fi
 set -e
 source source-me-first
+if ! iogw/iogw --version 2>&1 | grep $DOCKER_USER/$VER
+then 
+   echo "FAIL: Version mismatch: exepected $DOCKER_USER/$VER got $(iogw/iogw --version 2>&1)"
+   exit 1 
+fi
 iogw/iogw stop
 rm -Rvf $HOME/tmp-iogw-test
 docker pull library/redis:5

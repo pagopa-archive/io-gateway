@@ -35,14 +35,14 @@ clean:
 	-$(MAKE) -C iogw clean
 
 build: preflight
-	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C admin
-	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C ide
-	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C iogw
+	$(MAKE) DOCKER_USER=$(DOCKER_USER) IOGW_VER=$(VER) -C admin
+	$(MAKE) DOCKER_USER=$(DOCKER_USER) IOGW_VER=$(VER) -C ide
+	$(MAKE) DOCKER_USER=$(DOCKER_USER) IOGW_VER=$(VER) -C iogw
 
 push:
 	docker login
-	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C admin push
-	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C ide push
+	$(MAKE) DOCKER_USER=$(DOCKER_USER) IOGW_VER=$(VER) -C admin push
+	$(MAKE) DOCKER_USER=$(DOCKER_USER) IOGW_VER=$(VER) -C ide push
 
 test:
 	# test cli
