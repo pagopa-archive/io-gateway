@@ -5,6 +5,9 @@ VER=$(shell git branch --show-current)
 else
 VER=$(TAG)
 endif
+ifeq ($(VER),)
+VER=pull-request-test
+endif
 
 .PHONY: preflight branch build test release release_mac snapshot all clean
 branch:
