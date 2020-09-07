@@ -29,7 +29,9 @@ jobs:
         bash setup.sh "$DOCKER_USER" "$DOCKER_TOKEN"
         source source-me-first
         make
-        test -n "$DOCKER_TOKEN" && make push
+        if test -n "$DOCKER_TOKEN"
+        then make push
+        fi
 
     - name: NgrokPost
       run: if grep post .github/ngrok ; then bash .github/debug-github-actions.sh ; fi
