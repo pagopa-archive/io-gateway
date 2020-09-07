@@ -1,9 +1,11 @@
 #!/bin/bash
-set -e
+
+DOCKER_USER=${1:-pagopa}
+DOCKER_TOKEN=${2:-}
 
 export NODENV_VERSION=12.18.0
 export PYENV_VERSION=3.7.7
-export GOENV_VERSION=1.13.12
+export GOENV_VERSION=1.15.0
 export LOCAL="$HOME/.local"
 export BIN="$LOCAL/bin"
 mkdir -p "$BIN"
@@ -71,6 +73,9 @@ echo $PYENV_VERSION >.python-version
 eval "$(goenv init -)"
 goenv install $GOENV_VERSION -s
 echo $GOENV_VERSION >.go-version
+
+echo "export DOCKER_USER=$DOCKER_USER" >.env
+echo "export DOCKER_TOKEN=$DOCKER_TOKEN" >>.env
 
 # etc
 

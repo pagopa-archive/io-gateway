@@ -110,8 +110,8 @@ func TestMain(m *testing.M) {
 	})
 	log.SetLevel(log.DebugLevel)
 	Version = "test"
-	os.Setenv("HOME", "/tmp/iosdk-test")
-	run("rm -Rvf /tmp/iosdk-test ; mkdir /tmp/iosdk-test")
+	os.Setenv("HOME", "/tmp/iogw-test")
+	run("rm -Rvf /tmp/iogw-test ; mkdir /tmp/iogw-test")
 	os.Exit(m.Run())
 }
 

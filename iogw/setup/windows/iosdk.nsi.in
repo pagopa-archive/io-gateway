@@ -1,9 +1,9 @@
 !include LogicLib.nsh
 ; The name of the installer
-Name "iosdk"
+Name "iogw"
 
 ; The file to write
-OutFile "iosdk-setup.exe"
+OutFile "iogw-setup.exe"
 
 ; Request application privileges for Windows Vista
 RequestExecutionLevel admin
@@ -12,11 +12,11 @@ RequestExecutionLevel admin
 Unicode True
 
 ; The default installation directory
-InstallDir $PROGRAMFILES64\IOSDK
+InstallDir $PROGRAMFILES64\IOGW
 
 ; Registry key to check for directory (so if you install again, it will 
 ; overwrite the old one automatically)
-InstallDirRegKey HKLM "Software\io-sdk" "Install_Dir"
+InstallDirRegKey HKLM "Software\iogw" "Install_Dir"
 
 ;--------------------------------
 
@@ -32,7 +32,7 @@ UninstPage instfiles
 ;--------------------------------
 
 ; The stuff to install
-Section "io-sdk (required)"
+Section "iogw (required)"
 
   SectionIn RO
   
@@ -40,17 +40,17 @@ Section "io-sdk (required)"
   SetOutPath $INSTDIR
   
   ; Put file there
-  File "iosdk.exe"
+  File "iogw.exe"
   File "wsk.exe"
   
   ; Write the installation path into the registry
   WriteRegStr HKLM SOFTWARE\iosdk "Install_Dir" "$INSTDIR"
   
   ; Write the uninstall keys for Windows
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\iosdk" "DisplayName" "iosdk"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\iosdk" "UninstallString" '"$INSTDIR\uninstall.exe"'
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\iogw" "DisplayName" "iogw"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\iogw" "UninstallString" '"$INSTDIR\uninstall.exe"'
   WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\iosdk" "NoModify" 1
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\iosdk" "NoRepair" 1
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\iogw" "NoRepair" 1
   WriteUninstaller "$INSTDIR\uninstall.exe"
 
 ; Check if the path entry already exists and write result to $0
@@ -68,7 +68,6 @@ Section "Start Menu Shortcuts"
 
   CreateDirectory "$SMPROGRAMS\IOSDK"
   CreateShortcut "$SMPROGRAMS\iosdk\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
-  ;CreateShortcut "$SMPROGRAMS\iosdk\io-sdk.lnk" "$INSTDIR\iosdk_win.exe" "" "$INSTDIR\io-sdk.nsi" 0
   
 SectionEnd
 
@@ -79,18 +78,18 @@ SectionEnd
 Section "Uninstall"
   
   ; Remove registry keys
-  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\iosdk"
-  DeleteRegKey HKLM SOFTWARE\iosdk
+  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\iogw"
+  DeleteRegKey HKLM SOFTWARE\iogw
 
   ; Remove files and uninstaller
-  Delete $INSTDIR\iosdk.nsi
+  Delete $INSTDIR\iogw.nsi
   Delete $INSTDIR\uninstall.exe
 
   ; Remove shortcuts, if any
-  Delete "$SMPROGRAMS\iosdk\*.*"
+  Delete "$SMPROGRAMS\iogw\*.*"
 
   ; Remove directories used
-  RMDir "$SMPROGRAMS\iosdk"
+  RMDir "$SMPROGRAMS\iogw"
   RMDir "$INSTDIR"
 
 SectionEnd

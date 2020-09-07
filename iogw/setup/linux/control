@@ -1,8 +1,8 @@
-Package: iosdk
+Package: iogw
 Version: 0.5-pre
 Section: base
 Priority: optional
 Architecture: amd64
 Maintainer: Pierluigi Di Lorenzo <pierluigi@sciabarra.com>
-Description: io-sdk
- IO-SDK for PagoPA
+Description: iogw
+ IO-Gateway for App IO 

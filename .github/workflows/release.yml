@@ -4,7 +4,7 @@ on:
     tags:
     - '[0-9]*' # Push events to matching *, i.e. 1.0, 20.15.10
 
-name: Create Release and Upload Assets
+name: Release
 
 jobs:
   build_mac:
@@ -14,35 +14,45 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v1
         with:
-          go-version: '1.13'
+          go-version: '1.15'
         id: go
 
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
 
       - name: Build
+        env:
+          DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
+          DOCKER_USER: ${{secrets.DOCKER_USER}} 
         run: |
           make release_mac
 
       - name: Create Artifacts File
         id: mac_artifact
         run: |
-          sudo ln -s iosdk/setup/mac/target/pkg/*.pkg iosdk.pkg
-          MACPATH=$(ls iosdk/setup/mac/target/pkg/*.pkg)
-          MACNAME=$(basename iosdk/setup/mac/target/pkg/*.pkg)
-          echo MACPATH=${MACPATH} > mac_variables.sh
-          echo MACNAME=${MACNAME} >> mac_variables.sh
+          MACPATH=$(ls iogw/setup/mac/*.pkg)
+          MACNAME=$(basename $MACPATH)
+          MACBUILD=iogw/setup/mac/application/bin/iogw
+          sudo ln -sf $MACPATH iogw.pkg
+          sudo ln -sf $MACBUILD iogw.bin
+          echo MACNAME=${MACNAME} > mac_variables.sh
 
       - name: Upload Release pkg file as Artifact
         uses: actions/upload-artifact@v1
         with:
           name: mac_artifact
-          path: iosdk.pkg
+          path: iogw.pkg
+
+      - name: Upload Release bin file as Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: mac_artifact
+          path: iogw.bin
 
       - name: Upload Release mac variables as Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: variables
+          name: mac_artifact
           path: mac_variables.sh
 
   build:
@@ -55,42 +65,39 @@ jobs:
       - name: Build
         id: build
         env:
-          DOCKER_HUB_ACCESS_TOKEN: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
-          DOCKER_HUB_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
+          DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
         run: |
-          bash setup.sh
+          bash setup.sh "$DOCKER_USER" "$DOCKER_TOKEN"
           source source-me-first
-          docker login -u "$DOCKER_HUB_USERNAME" -p "$DOCKER_HUB_ACCESS_TOKEN"
           sudo apt-get install -y alien
-          make release
-          DEBPATH=$(ls iosdk/setup/linux/deb/iosdk_*.deb)
-          DEBNAME=$(basename iosdk/setup/linux/deb/iosdk_*.deb)
-          RPMPATH=$(ls iosdk/setup/linux/rpm/iosdk-*.rpm)
-          RPMNAME=$(basename iosdk/setup/linux/rpm/iosdk-*.rpm)
-          WINPATH=$(ls iosdk/setup/windows/iosdk_*.exe)
-          WINNAME=$(basename iosdk/setup/windows/iosdk_*.exe)
+          make release_lin
+          make release_win
+          DEBPATH=$(ls iogw/setup/linux/deb/iogw_*.deb)
+          DEBNAME=$(basename $DEBPATH)
+          RPMPATH=$(ls iogw/setup/linux/rpm/iogw-*.rpm)
+          RPMNAME=$(basename $RPMPATH)
+          WINPATH=$(ls iogw/setup/windows/iogw-*.exe)
+          WINNAME=$(basename $WINPATH)
           echo ::set-output name=deb_path::${DEBPATH}
           echo ::set-output name=deb_name::${DEBNAME}
           echo ::set-output name=rpm_path::${RPMPATH}
           echo ::set-output name=rpm_name::${RPMNAME}
           echo ::set-output name=win_path::${WINPATH}
           echo ::set-output name=win_name::${WINNAME}
+          echo ::set-output name=lin_build::iogw/setup/linux/bin/iogw
+          echo ::set-output name=win_build::iogw/setup/windows/iogw.exe
 
       - name: Download mac pkg Artifact
         uses: actions/download-artifact@v1
         with:
           name: mac_artifact
 
-      - name: Download mac variables Artifact
-        uses: actions/download-artifact@v1
-        with:
-          name: variables
 
       - name: Set mac variables
         id: mac_variables
         run: |
-          source variables/mac_variables.sh
-          echo ::set-output name=mac_path::${MACPATH}
+          source mac_artifact/mac_variables.sh
           echo ::set-output name=mac_name::${MACNAME}
 
       - name: Create Release
@@ -144,6 +151,40 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: mac_artifact/iosdk.pkg
+          asset_path: mac_artifact/iogw.pkg
           asset_name: ${{ steps.mac_variables.outputs.mac_name }}
           asset_content_type: application/x-newton-compatible-pkg
+
+      - name: Upload linux
+        id: upload-release-linux-exe
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ${{ steps.build.outputs.lin_build }}
+          asset_name: iogw_linux
+          asset_content_type: application/octet-stream
+
+
+      - name: Upload windows
+        id: upload-release-windows-exe
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ${{ steps.build.outputs.win_build }}
+          asset_name: iogw_win.exe
+          asset_content_type: application/octet-stream
+
+      - name: Upload mac
+        id: upload-release-mac-exe
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: mac_artifact/iogw.bin
+          asset_name: iogw_mac
+          asset_content_type: application/octet-stream

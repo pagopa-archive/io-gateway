@@ -76,4 +76,47 @@ Open a terminal, change to `admnin/actions` then do a `source debug-src`.
 Open a test and send each line to the terminal with control-enter.
 
 
+## Setup a port forwarding to localhost
 
+A common assumption for development tools is that they listen to localhost.
+
+This is the case for development mode of Svelte, since it listens to `http://localhost:5000`. However in version 2004 of WSL is not yet possible to access localhost, as everything is run in a virtual machine with its own ip address. To access localhost you need to setup port forwarding with ssh.
+
+You can do as follows in Ubuntu (for other distributions you need to adapt). First install and start SSH:
+
+```
+sudo apt-get remove --purge openssh-server
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get install -y openssh-server
+sudo service ssh start
+```
+
+Then get the ip address of your virtual machine. For example:
+
+```
+$ ifconfig | grep "inet "
+    inet 172.17.166.104  netmask 255.255.240.0  broadcast 172.17.175.255
+    inet 127.0.0.1  netmask 255.0.0.0
+```
+
+The IP is the one that is NOT `127.0.0.1`. The output in your case can be different.
+
+Once you found your IP address, use an SSH client to create a tunnel. I used the [one included in Git for Windows](https://gitforwindows.org/).
+
+Type:
+
+```
+ssh -L 5000:127.0.0.1:5000 <user>@<ip>
+```
+
+where `<user>` is the user you set up when you installed WSL2, and `<ip>` is the IP address you just found. You will also need to type the password you setup when you istalled WSL2.
+
+Once done you can launch the development kit. For example (see below for more inforations):
+
+```
+cd io-gateway/admin
+make devel
+```
+
+And you will be able to access to `http://localhost:5000` for development.

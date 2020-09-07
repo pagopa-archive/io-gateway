@@ -1,4 +1,5 @@
-iosdk/iosdk
+source-me
+iogw/iogw
 images/openwhisk/
 .DS_Store
 .version
@@ -6,6 +7,7 @@ images/openwhisk/
 .node-version
 .go-version
 .python-version
+.env
 node_modules/
 __pycache__/
 old/

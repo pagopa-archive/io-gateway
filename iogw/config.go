@@ -165,7 +165,7 @@ func configureIde(info string) {
 		uid = "-u root"
 	}
 
-	cmd := fmt.Sprintf("docker exec %s iosdk-theia wsk property set --apihost %s --auth %s", uid, Config.WhiskAPIHostDocker, Config.WhiskAPIKey)
+	cmd := fmt.Sprintf("docker exec %s iogw-theia wsk property set --apihost %s --auth %s", uid, Config.WhiskAPIHostDocker, Config.WhiskAPIKey)
 	err := Run(cmd)
 	if err != nil {
 		fmt.Println(err)
