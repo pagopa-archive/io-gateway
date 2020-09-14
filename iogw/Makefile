@@ -1,4 +1,4 @@
-IOGW_VER?=$(shell git branch --show-current)
+IOGW_VER?=$(shell git rev-parse --abbrev-ref HEAD)
 DOCKER_USER?=pagopa
 
 iogw: $(shell ls *.go)
