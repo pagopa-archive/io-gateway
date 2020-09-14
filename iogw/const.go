@@ -30,7 +30,7 @@ var WhiskImage = DockerHubUser + "/iogw-openwhisk"
 const RedisImage = "library/redis:5"
 
 // SchedulerImage is the image for io-sdk scheduler
-const SchedulerImage = DockerHubUser + "/iosdk-scheduler:master"
+var SchedulerImage = DockerHubUser + "/iogw-scheduler:master"
 
 // IoAPIHost is the host to send messages
 const IoAPIHost = "https://api.io.italia.it/api/v1"

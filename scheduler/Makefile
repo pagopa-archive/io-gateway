@@ -1,5 +1,5 @@
 IOGW_VER?=$(shell git rev-parse --abbrev-ref HEAD)
-IMG=pagopa/iogw-scheduler:$(IOSDK_VER)
+IMG=pagopa/iogw-scheduler:$(IOGW_VER)
 
 .PHONY: test clean
 

@@ -27,7 +27,7 @@ func Start() (string, error) {
 
 	err = SchedulerDeploy()
 	if err != nil {
-	    return err
+		return "", err
 	}
 
 	if !*skipIde {
