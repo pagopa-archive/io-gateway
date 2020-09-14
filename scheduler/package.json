@@ -25,6 +25,7 @@
   "homepage": "https://github.com/francescotimperi/io-sdk-scheduler#readme",
   "dependencies": {
     "chai": "^4.2.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mocha": "^8.0.1",
     "node-cron": "^2.0.3",

@@ -11,6 +11,8 @@
   import Send from "./Send.svelte";
   import Ship from "./Ship.svelte";
   import Import from "./Import.svelte";
+  import Scheduler from "./Scheduler.svelte";
+  import Config from "./Config.svelte";
   
   onMount(()=> navigate("/"))
 </script>
@@ -33,6 +35,7 @@
         <Route path="send/:key" let:params>
           <Send key={params.key} />
         </Route>
+        <Route path="config" component={Config} />
         <Route path="devel" component={Devel} />
         <Route path="debug" component={Debug} />
         <Route path="debug/:key" let:params>

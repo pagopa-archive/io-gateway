@@ -134,6 +134,7 @@ func parse(cmd string) {
 		dockerStatus("iosdk-openwhisk")
 		dockerStatus("iosdk-redis")
 		dockerStatus("iosdk-theia")
+		dockerStatus("iosdk-scheduler")
 	}
 }
 

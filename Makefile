@@ -22,16 +22,19 @@ clean:
 	-$(MAKE) -C admin clean
 	-$(MAKE) -C ide clean
 	-$(MAKE) -C iosdk clean
-
+	-$(MAKE) -C scheduler clean
+	
 build: preflight
 	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C admin
 	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C ide
 	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C iosdk
+	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C scheduler
 
 push:
 	docker login
 	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C admin push
 	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C ide push
+	$(MAKE) DOCKER_USER=$(DOCKER_USER) -C scheduler push
 
 test:
 	# test cli
@@ -40,6 +43,8 @@ test:
 	bash test.sh
 	# test actions
 	make -C admin/actions test
+	# test scheduler
+	make -C scheduler test
 
 snapshot:
 	date +%Y.%m%d.%H%M-snapshot >.snapshot

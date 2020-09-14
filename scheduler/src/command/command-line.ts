@@ -43,12 +43,12 @@ class CommandLine implements Runnable {
      * Execute the provided command.
      */
     public async run(){
-        console.log('Executing command line ',this.command);
+        console.log('**** Executing command line: ',this.command);
         await this.execute().then((stdout: string)=>{
             this.stdout = stdout;
-            console.log('Completed execution of command ',this.command);
+            console.log('**** Completed execution of command: ',this.command);
         }).catch((error: string) =>{
-            console.log('Failed execution of command ',this.command);
+            console.log('**** Failed execution of command ',this.command);
             this.stderr = error;
         });
     }

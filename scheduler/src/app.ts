@@ -1,4 +1,5 @@
-import  express from 'express';
+import express from 'express';
+import cors from 'cors';
 import AppRouter from "./routes/router";
 
 class App {
@@ -7,6 +8,7 @@ class App {
     constructor () {
         this.express = express();
         this.express.use(express.json());
+        this.express.use(cors());
         this.mountRoutes();
     }
 
