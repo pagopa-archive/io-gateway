@@ -1,5 +1,5 @@
-IOSDK_VER?=$(shell git rev-parse --abbrev-ref HEAD)
-IMG=pagopa/iosdk-scheduler:$(IOSDK_VER)
+IOGW_VER?=$(shell git rev-parse --abbrev-ref HEAD)
+IMG=pagopa/iogw-scheduler:$(IOSDK_VER)
 
 .PHONY: test clean
 
@@ -17,8 +17,8 @@ clean:
 start:
 	docker run -ti -d \
 	-p 3100:3100 \
-	--rm --name iosdk-scheduler --hostname iosdkscheduler \
-	-e IO_SDK_SCHEDULER_CONFIG='/scheduler/config/io-sdk-scheduler-container-config.json' \
+	--rm --name iogw-scheduler --hostname iogwscheduler \
+	-e IO_GW_SCHEDULER_CONFIG='/scheduler/config/io-gw-scheduler-container-config.json' \
     -v ${HOME}:/scheduler/config \
 	$(IMG)
 

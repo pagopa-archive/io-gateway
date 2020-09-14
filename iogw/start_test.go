@@ -50,7 +50,7 @@ func ExampleStart() {
 	// Deploying io-sdk scheduler engine
 	// docker pull pagopa/iogw-scheduler:master
 	// docker inspect --format={{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} iogw-openwhisk
-	// docker run -ti -d -p 3100:3100 --rm --name iogw-scheduler --hostname scheduler -e IO_GW_SCHEDULER_CONFIG=/scheduler/config/io-sdk-scheduler-container-config.json -v /tmp/iosdk-test/javascript:/scheduler/config --add-host=openwhisk:172.17.0.2 pagopa/iogw-scheduler:master
+	// docker run -ti -d -p 3100:3100 --rm --name iogw-scheduler --hostname scheduler -e IO_GW_SCHEDULER_CONFIG=/scheduler/config/io-gw-scheduler-container-config.json -v /tmp/iosdk-test/javascript:/scheduler/config --add-host=openwhisk:172.17.0.2 pagopa/iogw-scheduler:master
 	// Deploying IDE...
 	// docker pull pagopa/iogw-theia:test
 	// docker inspect --format={{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} iogw-openwhisk
