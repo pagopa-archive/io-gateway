@@ -1,5 +1,5 @@
 name: Build
-on: [push]
+on: [push, pull_request]
 jobs:
 
   build:
@@ -15,22 +15,23 @@ jobs:
       env:
         NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
         USER_PASS: ${{ secrets.USER_PASS }}
-        DOCKER_TOKEN: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
-        DOCKER_USER: ${{secrets.DOCKER_HUB_USERNAME}}        
+        DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
+        DOCKER_USER: ${{secrets.DOCKER_USER}}        
     - name: WaitPre
       run: if grep pre .github/ngrok ; then bash .github/wait.sh ; fi
    
     - name: Build
       shell: bash
       env: 
-        DOCKER_TOKEN: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
-        DOCKER_USER: ${{secrets.DOCKER_HUB_USERNAME}}
+        DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
+        DOCKER_USER: ${{secrets.DOCKER_USER}}
       run: |
-        bash setup.sh
+        bash setup.sh "$DOCKER_USER" "$DOCKER_TOKEN"
         source source-me-first
-        docker login -u "$DOCKER_USER" -p "$DOCKER_TOKEN"
         make
-        make push
+        if test -n "$DOCKER_TOKEN"
+        then make push
+        fi
 
     - name: NgrokPost
       run: if grep post .github/ngrok ; then bash .github/debug-github-actions.sh ; fi
@@ -41,4 +42,3 @@ jobs:
         DOCKER_TOKEN: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
     - name: WaitPost
       run: if grep post .github/ngrok ; then bash .github/wait.sh ; fi
-      

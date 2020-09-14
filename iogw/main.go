@@ -14,9 +14,6 @@ import (
 
 var (
 
-	//DockerHubUser changed by ldflags
-	DockerHubUser = "pagopa"
-
 	// TestModeFlag enable behaviours useful for testing
 
 	// global flags
@@ -30,15 +27,15 @@ var (
 	skipIde           = kingpin.Flag("skip-ide", "skip starting ide").Hidden().Default("false").Bool()
 
 	// hidden debug commands
-	debugCmd        = kingpin.Command("debug", "debug").Hidden()
-	wskProps        = debugCmd.Command("wskprops", "Create WskProps file").Hidden()
-	ideDeployCmd    = debugCmd.Command("ide-deploy", "Create IDE deployment").Hidden()
-	ideDestroyCmd   = debugCmd.Command("ide-destroy", "Destroy IDE deployment").Hidden()
-	whiskDeployCmd  = debugCmd.Command("whisk-deploy", "Create Whisk deployment").Hidden()
-	whiskDestroyCmd = debugCmd.Command("whisk-destroy", "Destroy Whisk deployment").Hidden()
-	redisDeployCmd  = debugCmd.Command("redis-deploy", "Create Redis deployment").Hidden()
-	redisDestroyCmd = debugCmd.Command("redis-destroy", "Destroy Redis deployment").Hidden()
-	inputCmd        = debugCmd.Command("input", "Input test").Hidden()
+	debugCmd        = kingpin.Command("debug", "debug")
+	wskProps        = debugCmd.Command("wskprops", "Create WskProps file")
+	ideDeployCmd    = debugCmd.Command("ide-deploy", "Create IDE deployment")
+	ideDestroyCmd   = debugCmd.Command("ide-destroy", "Destroy IDE deployment")
+	whiskDeployCmd  = debugCmd.Command("whisk-deploy", "Create Whisk deployment")
+	whiskDestroyCmd = debugCmd.Command("whisk-destroy", "Destroy Whisk deployment")
+	redisDeployCmd  = debugCmd.Command("redis-deploy", "Create Redis deployment")
+	redisDestroyCmd = debugCmd.Command("redis-destroy", "Destroy Redis deployment")
+	inputCmd        = debugCmd.Command("input", "Input test")
 	inputArgCmd     = inputCmd.Arg("input arg", "input arg").Default("").String()
 	inputSelectFlag = inputCmd.Flag("select", "select").Bool()
 	// start, stop, init and status
@@ -131,10 +128,10 @@ func parse(cmd string) {
 		ShowError(err)
 	// Status
 	case statusCmd.FullCommand():
-		dockerStatus("iosdk-openwhisk")
-		dockerStatus("iosdk-redis")
-		dockerStatus("iosdk-theia")
-		dockerStatus("iosdk-scheduler")
+		dockerStatus("iogw-openwhisk")
+		dockerStatus("iogw-redis")
+		dockerStatus("iogw-theia")
+		dockerStatus("iogw-scheduler")
 	}
 }
 

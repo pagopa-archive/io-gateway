@@ -12,10 +12,10 @@ import (
 // iosdk start
 // then remove the "_"
 func _ExamplePackageUpdate() {
-	run("rm -Rvf /tmp/iosdk-test ; mkdir /tmp/iosdk-test")
+	run("rm -Rvf /tmp/iogw-test ; mkdir /tmp/iogw-test")
 	ConfigLoad()
 	DryRunPush("123456")
-	Configure("/tmp/iosdk-test/javascript")
+	Configure("/tmp/iogw-test/javascript")
 	ConfigLoad()
 	Config.WhiskAPIKey = DefaultWhiskAPIKey
 	m := ConfigMap()

@@ -9,7 +9,7 @@ const ConfigFile = "~/.iosdk.v3"
 const Author = "Michele Sciabarra"
 
 // Description is the descript
-const Description = "iosdk is an SDK to develop connectors for the IO App, check http://github.com/pagopa/io-sdk for more infos"
+const Description = "iogw is is a Gateway to send messages to the app IO."
 
 //MinDockerVersion required
 const MinDockerVersion = "18.06.3-ce"
@@ -21,10 +21,10 @@ const BrowserURL = "http://localhost:3280/"
 //const DockerHubUser = "pagopa"
 
 // IdeImage is the image for the ide
-var IdeImage = DockerHubUser + "/iosdk-theia"
+var IdeImage = DockerHubUser + "/iogw-theia"
 
 // WhiskImage is the openwhisk image
-var WhiskImage = DockerHubUser + "/iosdk-openwhisk"
+var WhiskImage = DockerHubUser + "/iogw-openwhisk"
 
 // RedisImage is the image for redis
 const RedisImage = "library/redis:5"
