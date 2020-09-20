@@ -1,4 +1,4 @@
-IOGW_VER?=$(shell git branch --show-current)
+IOGW_VER?=$(shell git rev-parse --abbrev-ref HEAD)
 WSK_URL=https://github.com/apache/openwhisk-cli/releases/download/1.0.0/OpenWhisk_CLI-1.0.0-mac-amd64.zip
 
 BIN=application/bin

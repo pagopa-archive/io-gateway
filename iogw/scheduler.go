@@ -7,7 +7,7 @@ import (
 // SchedulerDeploy deploys scheduler docker with config parameters
 func SchedulerDeploy() error {
 	fmt.Println("Deploying io-sdk scheduler engine")
-	fmt.Println(schedulerDockerRun(DefaultSchedulerConfigFile,Config.AppDir,DefaultSchedulerConfigPath, SchedulerImage))
+	fmt.Println(schedulerDockerRun(DefaultSchedulerConfigFile, Config.AppDir, DefaultSchedulerConfigPath, SchedulerImage))
 	return nil
 }
 
@@ -24,17 +24,17 @@ func schedulerDockerRun(configFile string, appDir string, configPath string, ima
 		return err.Error()
 	}
 
-	openWhiskIP := dockerIP("iosdk-openwhisk")
-        if openWhiskIP == nil {
-            		return "cannot find openwhisk";
-        }
+	openWhiskIP := dockerIP("iogw-openwhisk")
+	if openWhiskIP == nil {
+		return "cannot find openwhisk"
+	}
 
 	cmd := fmt.Sprintf(`docker run -ti -d -p 3100:3100
     --rm --name iosdk-scheduler --hostname scheduler
-    -e IO_SDK_SCHEDULER_CONFIG=%s
+    -e IO_GW_SCHEDULER_CONFIG=%s
     -v %s:%s
     --add-host=openwhisk:%s
-    %s`,configFile, appDir, configPath, *openWhiskIP, image)
+    %s`, configFile, appDir, configPath, *openWhiskIP, image)
 
 	_, err := SysErr(cmd)
 	if err != nil {

@@ -4,7 +4,7 @@ import JobData from "../model/job-data";
 /**
  * Stores and Retrieves scheduling configurations from a JSON File.
  *
- * Path to the config file can be parametrized using the environment variable IO_SDK_SCHEDULER_CONFIG.
+ * Path to the config file can be parametrized using the environment variable IO_GW_SCHEDULER_CONFIG.
  *
  * If not passed it fallback to the default value '${HOME}/io-sdk-scheduler.json
  */
@@ -16,8 +16,8 @@ class SchedulerConfigurator {
 
     public constructor(){
 
-        if(process.env.IO_SDK_SCHEDULER_CONFIG) {
-            this.configFilename = process.env.IO_SDK_SCHEDULER_CONFIG
+        if(process.env.IO_GW_SCHEDULER_CONFIG) {
+            this.configFilename = process.env.IO_GW_SCHEDULER_CONFIG
         }   else {
             this.configFilename = this.DEFAULT_CONFIG_FILENAME;
         }

@@ -137,7 +137,7 @@ iosdk status
 che vi darà come risultato qualcosa di simile:
 
 ```
-iosdk-openwhisk: running
+iogw-openwhisk: running
 iosdk-redis: running
 iosdk-theia: running
 ```

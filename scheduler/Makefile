@@ -1,5 +1,16 @@
-IOGW_VER?=$(shell git rev-parse --abbrev-ref HEAD)
-IMG=pagopa/iogw-scheduler:$(IOGW_VER)
+DOCKER_USER?=pagopa
+#IOGW_VER?=$(shell git rev-parse --abbrev-ref HEAD)
+#IMG=pagopa/iogw-scheduler:$(IOGW_VER)
+TAG=$(shell git tag --points-at HEAD)
+ifeq ($(TAG),)
+VER=$(shell git rev-parse --abbrev-ref HEAD)
+else
+VER=$(TAG)
+endif
+ifeq ($(VER),)
+VER=noversion
+endif
+IMG=$(DOCKER_USER)/iogw-scheduler:$(VER)
 
 .PHONY: test clean
 
@@ -25,3 +36,4 @@ start:
 test:
 	npm install
 	npm run test
+

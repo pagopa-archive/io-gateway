@@ -1,4 +1,4 @@
-IOGW_VER?=$(shell git branch --show-current)
+IOGW_VER?=$(shell git rev-parse --abbrev-ref HEAD)
 WSK=https://github.com/apache/openwhisk-cli/releases/download/1.0.0/OpenWhisk_CLI-1.0.0-windows-amd64.zip
 HERE:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 

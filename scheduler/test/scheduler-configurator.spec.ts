@@ -7,7 +7,7 @@ const aJob = new JobData('testJob',"*/1 * * * *",'echo this is a message');
 const configurator  = new SchedulerConfigurator();
 
 // set the env variable to force the configurator to use a custom config filename.
-process.env.IO_SDK_SCHEDULER_CONFIG = process.env.HOME+'/io-sdk-scheduler-config-test.json';
+process.env.IO_GW_SCHEDULER_CONFIG = process.env.HOME+'/io-sdk-scheduler-config-test.json';
 
 describe("SchedulerConfigurator",function(){
     describe("persistJobs", function(){

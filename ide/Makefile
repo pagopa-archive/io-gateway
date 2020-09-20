@@ -1,7 +1,7 @@
 DOCKER_USER?=pagopa
 TAG=$(shell git tag --points-at HEAD)
 ifeq ($(TAG),)
-VER=$(shell git branch --show-current)
+VER=$(shell git rev-parse --abbrev-ref HEAD)
 else
 VER=$(TAG)
 endif

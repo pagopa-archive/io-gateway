@@ -1,7 +1,7 @@
 #!/bin/bash
 TAG=$(git tag --points-at HEAD)
 if test -z "$TAG"
-then VER=$(git branch --show-current)
+then VER=$(git rev-parse --abbrev-ref HEAD)
 else VER=$TAG
 fi
 set -e
