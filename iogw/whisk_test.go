@@ -10,7 +10,7 @@ func ExampleWhiskDockerRunOk() {
 	// Output:
 	// docker pull pagopa/iogw-openwhisk:test
 	// docker inspect --format={{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} iogw-redis
-	// docker run -d -p 3280:3280 --rm --name iogw-openwhisk --hostname openwhisk -e CONTAINER_EXTRA_ENV=__OW_REDIS=1.2.3.4 -e CONFIG_FORCE_whisk_users_guest=a14ccfb1-d2c8-4ddc-91e6-a6fc4617a53c:Ov9VnxiJjcDIxzXarElXjJizi481LWs8Y2WNp8zCkN7WbggyG5g8xv1n0HTYBkMn -v //var/run/docker.sock:/var/run/docker.sock pagopa/iogw-openwhisk:test
+	// docker run -d -p 3280:3280 --rm --name iogw-openwhisk --hostname openwhisk -e CONTAINER_EXTRA_ENV=__OW_REDIS=1.2.3.4 -e CONFIG_FORCE_whisk_users_guest=a14ccfb1-d2c8-4ddc-91e6-a6fc4617a53c:Ov9VnxiJjcDIxzXarElXjJizi481LWs8Y2WNp8zCkN7WbggyG5g8xv1n0HTYBkMn	 -v //var/run/docker.sock:/var/run/docker.sock pagopa/iogw-openwhisk:test
 	// docker exec iogw-openwhisk waitready
 }
 
