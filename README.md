@@ -1,6 +1,8 @@
 IO-Gateway
 -------
 
+**Nota:** IO-Gateway è all'inizio dello sviluppo e non è pronto per essere usato. Per il momento usare [IO-SDK](https://github.com/pagopa/io-sdk).
+
 IO-Gateway è un server per l'invio di messaggi ai cittadini italiani
 usando l'[**app IO**][], l'app dei servizi pubblici italiani.
 
