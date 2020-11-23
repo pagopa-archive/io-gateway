@@ -1,6 +1,6 @@
 WSK=https://github.com/apache/openwhisk-cli/releases/download/1.0.0/OpenWhisk_CLI-1.0.0-linux-amd64.tgz
 ifeq ($(origin IOGW_VER), undefined)
-IOGW_VER?=$(shell git branch --show-current)
+IOGW_VER?=$(shell git rev-parse --abbrev-ref HEAD)
 IOGW_VER_PKG=0.0-$(IOGW_VER)
 else
 IOGW_VER_PKG=$(IOGW_VER)

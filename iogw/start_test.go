@@ -47,10 +47,15 @@ func ExampleStart() {
 	// docker inspect --format={{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} iogw-redis
 	// docker run -d -p 3280:3280 --rm --name iogw-openwhisk --hostname openwhisk -e CONTAINER_EXTRA_ENV=__OW_REDIS=1.2.3.4 -e CONFIG_FORCE_whisk_users_guest=23bc46b1-71f6-4ed5-8c54-816aa4f8c502:123zO3xZCLrMN6v2BKK1dXYFpXlPkccOFqm12CdAsMgRU4VrNZ9lyGVCGuMDGIwP -v //var/run/docker.sock:/var/run/docker.sock pagopa/iogw-openwhisk:test
 	// docker exec iogw-openwhisk waitready
+	// Deploying io-sdk scheduler engine
+	// docker pull pagopa/iogw-scheduler:master
+	// docker inspect --format={{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} iogw-openwhisk
+	// docker run -ti -d -p 3100:3100 --rm --name iosdk-scheduler --hostname scheduler -e IO_GW_SCHEDULER_CONFIG=/scheduler/config/io-sdk-scheduler-container-config.json -v /tmp/iogw-test/javascript:/scheduler/config --add-host=openwhisk:172.17.0.2 pagopa/iogw-scheduler:master
+
 	// Deploying IDE...
 	// docker pull pagopa/iogw-theia:test
 	// docker inspect --format={{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} iogw-openwhisk
-	// docker run -d -p 3000:3000 --rm --name iogw-theia -e HOME=/home/project -v /tmp/iogw-test/javascript:/home/project --add-host=openwhisk:172.17.0.2 pagopa/iogw-theia:test
+	// docker run -d -p 3000:3000 --rm --name iogw-theia -e HOME=/home/project -v /tmp/iogw-test/javascript:/home/project -u 1001 --add-host=openwhisk: pagopa/iogw-theia:test
 	// <nil>
 }
 
@@ -61,6 +66,9 @@ func ExampleStop() {
 	// Output:
 	// Destroying IDE...
 	// docker kill iogw-theia
+	//
+	// Destroying io-sdk scheduler engine
+	// docker stop iosdk-scheduler
 	//
 	// Destroying Whisk...
 	// docker exec iogw-openwhisk stop

@@ -1,7 +1,7 @@
 DOCKER_USER?=pagopa
 TAG=$(shell git tag --points-at HEAD)
 ifeq ($(TAG),)
-VER=$(shell git branch --show-current)
+VER=$(shell git rev-parse --abbrev-ref HEAD)
 else
 VER=$(TAG)
 endif
@@ -36,16 +36,20 @@ clean:
 	-$(MAKE) -C admin clean
 	-$(MAKE) -C ide clean
 	-$(MAKE) -C iogw clean
+	-$(MAKE) -C scheduler clean
 
 build: preflight
 	$(MAKE) DOCKER_USER=$(DOCKER_USER) IOGW_VER=$(VER) -C admin
 	$(MAKE) DOCKER_USER=$(DOCKER_USER) IOGW_VER=$(VER) -C ide
 	$(MAKE) DOCKER_USER=$(DOCKER_USER) IOGW_VER=$(VER) -C iogw
+	$(MAKE) DOCKER_USER=$(DOCKER_USER) IOGW_VER=$(VER) -C scheduler
+
 
 push:
 	docker login
 	$(MAKE) DOCKER_USER=$(DOCKER_USER) IOGW_VER=$(VER) -C admin push
 	$(MAKE) DOCKER_USER=$(DOCKER_USER) IOGW_VER=$(VER) -C ide push
+	$(MAKE) DOCKER_USER=$(DOCKER_USER) IOGW_VER=$(VER) -C scheduler push
 
 test:
 	# test cli
@@ -54,6 +58,8 @@ test:
 	bash test.sh
 	# test actions
 	make -C admin/actions test
+	# test scheduler
+	make -C scheduler test
 
 snapshot:
 	date "+%Y.%m%d.%H%M-snapshot" | tee .snapshot

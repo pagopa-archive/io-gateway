@@ -131,6 +131,7 @@ func parse(cmd string) {
 		dockerStatus("iogw-openwhisk")
 		dockerStatus("iogw-redis")
 		dockerStatus("iogw-theia")
+		dockerStatus("iogw-scheduler")
 	}
 }
 
