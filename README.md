@@ -1,10 +1,10 @@
 IO-Gateway
 -------
 
-IO-Gateway è un server per l'invio di messaggi ai cittadini italiani
+IO-Gateway è un progetto per sviluppare un server per l'invio di messaggi ai cittadini italiani
 usando l'[**app IO**](https://io.italia.it/), l'app dei servizi pubblici italiani.
 
-È progettato per raccogliere dati da varie fonti, tramite plugin detti
+È ideato per raccogliere dati da varie fonti, tramite plugin detti
 connettori, ed è estendibile con nuovi connettori che possono essere
 sviluppati da terze parti.
 
