@@ -9,7 +9,7 @@ connettori. Questi plugin possono essere sviluppati da terze parti.
 Il progetto è una iniziativa di [PagoPA spa](https://www.pagopa.gov.it/) ed è gestito dall'[Associazione NoiOpen](https://noiopen.it)
 
 
-**NOTA** fino a che non verrà completata la migrazione si prega di contribuire ad `[IO-SDK`](github.com/pagopa/io-sdk).
+**NOTA** fino a che non verrà completata la migrazione si prega di contribuire ad `[IO-SDK`](https://github.com/pagopa/io-sdk).
 
 **NOTA** I branch master e develop sono obsoleti non contribuire a quei branch
 
