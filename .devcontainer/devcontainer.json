@@ -1,5 +1,5 @@
 {
-    "name": "io-sdk-dev",
+    "name": "io-gateway-dev",
     "dockerFile": "Dockerfile",
     "extensions": [
     ],
