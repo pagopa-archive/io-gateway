@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+
+  redis:
+    image: library/redis:5
+    command: redis-server --requirepass password
+    ports:
+      - "6379:6379"
+
+  openwhisk:
+    image: pagopa/iosdk-openwhisk:master
+    ports:
+      - "3280:3280"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      CONTAINER_EXTRA_ENV: "__OW_REDIS_IP=redis" 
+      CONTAINER_EXTRA_ENV1: "__OW_REDIS_PASSWORD=password"
+      CONFIG_FORCE_whisk_users_guest: "2531ee7a-b1ca-434f-bc2a-438696b0b50e:AH1U58U44H7QM5lbNm8q543oLVSRZ5sB0n6hWA2YE6XXP73rCK8gQuVMF09iugMt"
+
+# networks:
+#   frontend:
+#   backend:
+
+# volumes:
+#   db-data:
